@@ -1,0 +1,254 @@
+.mat-stepper-vertical {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+ 
+  .cl_image_div{
+    width:100%; 
+    height:120px;
+    padding-left:10px;
+     padding-right:10px;
+      margin-top:10px;
+  }
+
+  .cl_first_column_img{
+    width:47%; 
+    color:rgb(182, 179, 179);
+    height:120px;
+     border: 1px solid rgb(212, 209, 209);
+     margin-right:10px;
+     border-radius:10px;
+  }
+
+  .cl_second_column_img{
+    width:47%;
+    height:120px;
+     color:rgb(182, 179, 179);
+      border: 1px solid rgb(212, 209, 209);
+       border-radius:10px;
+  }
+
+  .cl_images{
+    width:40%; 
+    height:25%;
+    color:rgb(182, 179, 179);
+  }
+
+  .cl_display_img{
+    width:100%;
+     height:100%; 
+     border-radius:10px;
+  }
+
+  .buttonClass{
+    background-color: #fa7549;
+    color:white;
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .buttonPayClass{
+    background: linear-gradient(to right, #fe4f14,#fe8860,#feae93);
+    // background-color: #fa7549;
+    color:white;
+    padding:12px;
+    width:100%;
+    font-weight:500;
+    border-radius:5px;
+    font-size:16px;
+
+    // padding-left:10px;
+    // padding-right:10px;
+  }
+  .disabledClass{
+    background-color: #f1f4f9;
+    color:black;
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .buttonBackClass{
+    background-color: #f1f4f9;
+    color:black;
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+
+.mat-step-icon .mat-icon {
+  font-size: 13px !important;
+  height: 16px;
+  width: 16px;
+}
+
+.desc-text{
+  font-size:14px;
+}
+
+.text-font-size{
+  font-size:13px;
+}
+
+.floating-label-css{
+  font-size:13px;
+}
+
+.floating-label-css-underline{
+  font-size:13px;
+  color:  #fa7549;
+  margin: 0px 5px 5px 5px;
+}
+
+.floating-label-css-underline1{
+  font-size:13px;
+  color:  #fa7549;
+  margin: 0px 5px 5px 15px;
+}
+
+
+.margin-top-css {
+  margin-top: 0px;
+}
+
+
+.table-text-size{
+  font-size:10px;
+}
+
+.table-title-text-size{
+  font-size:9px;
+}
+td{
+  padding: 10px;
+  border:1px solid rgb(168, 167, 167);
+}
+
+
+th {
+  padding: 10px;
+  font-weight:normal;
+  background-color: #f1f4f9;
+  border:1px solid rgb(168, 167, 167);
+}
+
+.cl_bottom_nav_css{
+  width:24px;
+  height:24px;
+  // color:gray;
+
+  width:100%;
+  color:gray;
+  // padding-top:5px;
+  // padding-bottom:5px;
+  background-color: #ffffff;
+}
+
+.cl_bottom_fix{
+  position: fixed; 
+  bottom:0px;
+  width:100%;
+  padding:8px;
+   border-top:1px solid #f1f4f9;
+    background-color: white;
+}
+
+.cl_post_css{
+  width:100%;
+  width:24px;
+  height:24px;
+  color: #fb7645;
+  // padding-top:5px;
+  // padding-bottom:5px;
+  background-color: #ffffff;
+ 
+}
+
+.cl_text_font{
+  padding-top:4px;
+  font-size: 11px;
+}
+
+.cl_selected-text_font{
+  padding-top:4px;
+  font-size: 11px;
+  color: #fb7645;
+}
+ion-radio {
+  --color-checked: #fb7645;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #fb7645; /*replace with your color*/
+}
+
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #f5b9a6;  /*replace with your color*/
+}
+
+.card-css
+{
+  border-radius:6px;
+  width:90px;
+  padding:5px;
+  height:90px;
+  margin:6px;
+}
+
+.card-one {
+  background: linear-gradient(to bottom,#fc7c51,#fcb29a);
+  // --color:white;
+
+ 
+}
+
+.h-css-one{
+  color:white;
+}
+
+.label-css-one{
+  color:white;
+}
+
+.h-css-two{
+  color:black;
+}
+
+.label-css-two{
+  color:gray;
+}
+.card-two {
+  --background: white !important;
+ 
+}
+.padding1px{
+  padding:2px;
+}
+
+.padding12px{
+  padding:12px;
+  line-height: 20px;
+}
+
+
+.expiryCard-css{
+  padding-top:10px;
+  padding-bottom:10px;
+  background: linear-gradient(to right,#f88863,#fcb29a);
+  color:#ffffff;
+  font-size:10px;
+  line-height: 20px;
+  border-radius:10px;
+  // height:50px;
+}
+
+.closeButtonEnd{
+  color:#ffffff;width:24px;height:24px; align-self: flex-end;align-items: flex-end;
+}
+
+.closeButtonOnImage{
+
+  position:absolute;top:7px;right:1px;width:30px;height:30px;
+}

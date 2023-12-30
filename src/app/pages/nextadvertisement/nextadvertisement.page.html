@@ -1,0 +1,161 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-row>
+      <ion-col size="2">
+        <button ion-button class="cl-back-button" (click)="goBackword()" style="color:white;margin:7px"></button>
+      </ion-col>
+      <ion-col size="10" class="TitleHeader TitleText">
+        <ion-label style="color:white">Advertisement</ion-label>
+      </ion-col>
+    
+    </ion-row>
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form #userForm="ngForm" style="width:100%;margin-top:10px">
+ 
+
+<div fxLayout="row" fxLayoutAlign="  center center" style="width:100%;margin-top:5px">
+  <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;margin-top:10px" appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Location" [(ngModel)]="advertisementModel.address" ngx-google-places-autocomplete
+          [options]='options' #placesRef="ngx-places" name="city" required  
+          (onAddressChange)="handleAddressChange($event)">
+         
+      </mat-form-field>
+</div>
+ 
+<!-- <div fxLayout="row" fxLayoutAlign="center center" style="width:100%;">
+  <mat-form-field style="width:96%; margin-top:10px" appearance="outline">
+    <mat-label>Mobile</mat-label>
+        <input matInput class="form-control" type="tel" name="contact" minlength="10" maxlength="10" [(ngModel)]="advertisementModel.contact" #contact="ngModel"
+          align="center" required pattern="[0-9]+$">
+          <mat-error>
+            <div class="form-group">
+              <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+                Mobile Is Requird
+              </div>
+            </div>
+          </mat-error>
+  </mat-form-field>
+</div> -->
+
+
+<div fxLayout="row" fxLayoutAlign="center center" style="width:100%;margin-top:5px">
+  <mat-form-field style="width:96%" appearance="outline">
+    <mat-label>Price</mat-label>
+        <input matInput class="form-control" type="number" name="price" [(ngModel)]="advertisementModel.price" #price="ngModel"
+          align="center" required pattern="[0-9.]+$">
+          <mat-error>
+            <div class="form-group">
+              <div *ngIf="price.invalid && (price.dirty || price.touched)">
+                Price Is Requird
+              </div>
+            </div>
+          </mat-error>
+  </mat-form-field>
+</div>
+
+<h5 style="margin-top:15px; margin-left:10px">Upload images</h5>
+<!-- <label style="margin-top:20px; margin-left:10px; color:black"><b>Upload Images</b></label> -->
+<div class="cl_image_div" fxLayout="row">
+<div fxLayout="column" fxLayoutAlign="center center" class="cl_first_column_img" onclick="document.getElementById('image_upload1').click()">
+  <ion-icon *ngIf="firstImage == '' " name="camera" class="cl_images"></ion-icon>
+  <h5 *ngIf="firstImage == '' " align="center">upload Image</h5>
+  <img *ngIf="firstImage != '' " src="{{firstImage}}" class="cl_display_img" >
+</div>
+<div fxLayout="column" fxLayoutAlign="center center" class="cl_second_column_img" onclick="document.getElementById('image_upload2').click()">
+  <ion-icon *ngIf="secondImage == '' " name="camera" class="cl_images"></ion-icon>
+  <h5 *ngIf="secondImage == '' " align="center">upload Image</h5>
+  <img *ngIf="secondImage != '' " src="{{secondImage}}" class="cl_display_img">
+</div>
+</div>
+
+<div class="cl_image_div" fxLayout="row">
+  <div fxLayout="column" fxLayoutAlign="center center" class="cl_first_column_img" onclick="document.getElementById('image_upload3').click()">
+    <ion-icon *ngIf="thirdImage == '' " name="camera" class="cl_images"></ion-icon>
+    <h5 *ngIf="thirdImage == '' " align="center">upload Image</h5>
+    <img *ngIf="thirdImage != '' " src="{{thirdImage}}" class="cl_display_img">
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="cl_second_column_img" onclick="document.getElementById('image_upload4').click()">
+    <ion-icon *ngIf="fourthImage == '' " name="camera" class="cl_images"></ion-icon>
+    <h5 *ngIf="fourthImage == '' " align="center">upload Image</h5>
+    <img  *ngIf="fourthImage != '' " src="{{fourthImage}}" class="cl_display_img">
+  </div>
+  </div>
+
+  <div class="cl_image_div" fxLayout="row">
+    <div fxLayout="column" fxLayoutAlign="center center" class="cl_first_column_img" onclick="document.getElementById('image_upload5').click()">
+      <ion-icon *ngIf="fifthImage == '' " name="camera" class="cl_images"></ion-icon>
+      <h5 *ngIf="fifthImage == '' " align="center">upload Image</h5>
+      <img *ngIf="fifthImage != '' " src="{{fifthImage}}" class="cl_display_img" >
+    </div>
+  
+    </div>
+
+    <input style="display: none;" id="image_upload1" type="file" (change)="detectEventGallery($event,0)">
+    <input style="display: none;" id="image_upload2" type="file" (change)="detectEventGallery($event,1)">
+    <input style="display: none;" id="image_upload3" type="file" (change)="detectEventGallery($event,2)">
+    <input style="display: none;" id="image_upload4" type="file" (change)="detectEventGallery($event,3)">
+    <input style="display: none;" id="image_upload5" type="file" (change)="detectEventGallery($event,4)">
+
+
+<div style="margin-top:5%; margin-bottom:15%">
+  <button [disabled]="price.invalid " mat-raised-button class="nextButton" (click)="next(advertisementModel)">Next</button>
+</div>
+</form>
+
+<div class="cl_bottom_fix" fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+      
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+  (click)="home()">
+  <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+  <label fxLayoutAlign="center center" class="cl_text_font">HOME</label>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+  (click)="openChatList()">
+  <ion-icon class="cl_bottom_nav_css" name="document" (click)="openChatList()"></ion-icon>
+  <label fxLayoutAlign="center center" class="cl_text_font">CHATS</label>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+    (click)="postAdvertisement()">
+  <ion-icon class="cl_bottom_nav_css"  name="add-circle" (click)="postAdvertisement()">
+  </ion-icon>
+  <label fxLayoutAlign="center center" class="cl_text_font">SELL</label>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+  (click)="openFavourite()">
+  <ion-icon class="cl_post_css" name="heart"  (click)="openFavourite()"></ion-icon>
+  <label fxLayoutAlign="center center" class="cl_selected-text_font">MY ADS</label>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+    (click)="openProfile()">
+    <ion-icon class="cl_bottom_nav_css" name="person"  (click)="openProfile()"></ion-icon>
+    <label fxLayoutAlign="center center" class="cl_text_font">PROFILE</label>
+  </div>
+
+</div>
+
+
+<!-- <div class="cl_bottom_fix">
+  <div fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+    <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+    <ion-icon name="document" class="cl_bottom_nav_css" (click)="openChatList()"></ion-icon>
+    <ion-icon name="add-circle" class="cl_post_css" (click)="postAdvertisement()">
+    </ion-icon>
+    <ion-icon name="heart" class="cl_bottom_nav_css" (click)="openFavourite()"></ion-icon>
+    <ion-icon name="person" class="cl_bottom_nav_css" (click)="openProfile()"></ion-icon>
+  </div>
+</div> -->
+</ion-content>

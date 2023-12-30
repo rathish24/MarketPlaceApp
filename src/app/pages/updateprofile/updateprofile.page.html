@@ -1,0 +1,102 @@
+<ion-header class="new-background-color">
+  <ion-toolbar class="new-background-color" fxLayoutAlign="center center">
+  <ion-row fxLayoutAlign="center center">
+    <ion-col size="1">
+      
+      <button ion-button class="cl-back-button" (click)="goBackword()" style="color:white;margin:7px"></button>
+    </ion-col>
+    <ion-col size="11" fxLayoutAlign="start center">
+      <ion-label style="color:white;" class="TitleText">Edit Profile</ion-label>
+    </ion-col>
+ 
+  </ion-row>
+   
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+<div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+
+  <div fxLayoutAlign="center center" fxLayout="column" onclick="document.getElementById('profile_pic_upload').click()">
+    <img *ngIf="profileImg == '1' " src="../../../assets/agent.png" class="img-css" />
+    <img  *ngIf="profileImg != '1' " src="{{profileImg}}" class="img-css" />
+    <label class="pic-text">Change profile picture</label>
+  </div>
+  <input style="display: none;" id="profile_pic_upload" type="file" (change)="detectEventGallery($event)">
+  
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="width:100%;margin-top:25px">
+    <mat-form-field style="width:96%;" appearance="outline">
+      <mat-label class="label-text-css">Name</mat-label>
+          <input matInput class="form-control" type="text" name="name" [(ngModel)]="profileModel.name" #name="ngModel"
+            align="center" required style="font-size:13px;">
+            <mat-error>
+              <div class="form-group" style="margin-bottom:10px">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                  Name Is Requird
+                </div>
+              </div>
+            </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="width:100%;">
+    <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;" appearance="outline">
+      <mat-label class="label-text-css" >Email</mat-label>
+      <input matInput class="form-control " name="email" [(ngModel)]="profileModel.email" #email="ngModel"
+        pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  style="font-size:13px;" />
+      <mat-error>
+        <div class="form-group">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" >
+           Invalid email address
+          </div>
+        </div>
+      </mat-error>
+  
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="width:100%;">
+  <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%" appearance="outline">
+    <mat-label class="label-text-css">Mobile</mat-label>
+        <input matInput class="form-control" type="tel" name="contact" minlength="10" maxlength="10" [(ngModel)]="profileModel.contact" #contact="ngModel"
+          align="center"  style="font-size:13px;" required>
+          <mat-error>
+            <div class="form-group">
+              <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+                Mobile Is Requird
+              </div>
+            </div>
+          </mat-error>
+  </mat-form-field>
+  </div>
+
+  <!-- <ion-row
+  style="border: 1px solid #d3d5da;border-radius: 5px;height:60px; padding-left:8px; width:96%; margin-top:5px;margin-bottom:15px">
+  <ion-col size="4" fxLayoutAlign="start center">
+    <label class="floating-label-css" fxLayoutAlign="start center">Gender</label>
+
+  </ion-col>
+
+  <ion-col size="8" fxLayoutAlign="center center">
+    <ion-radio-group class="form-control" (ionChange)="radioGroupChange($event)"  [(ngModel)]="profileModel.gender" #gender="ngModel">
+      <div fxLayout="row" fxLayoutGap="10px">
+        <div *ngFor="let item of genderArray" fxLayoutAlign="center center">
+          <ion-radio checked="true" value="{{item.value}}" ></ion-radio> 
+          <ion-label fxLayoutAlign="center center" class="floating-label-css" style="margin-left:10px">
+            {{item.name}}</ion-label>
+        </div>
+      </div>
+    </ion-radio-group>
+
+
+  </ion-col>
+</ion-row> -->
+
+  <button mat-raised-button class="updateProfileButton" [disabled]="email.invalid || contact.invalid ||  name.invalid"
+  (click)="updateProfileData(advertisementModel)">Update</button>
+</div>
+ 
+</ion-content>

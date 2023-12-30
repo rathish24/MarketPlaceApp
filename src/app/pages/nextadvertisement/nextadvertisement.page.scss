@@ -1,0 +1,134 @@
+
+.masters {
+    --background: #f1f4f9;
+  }
+
+  .TitleHeader{
+    width: 100%;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+}
+.TitleText{
+    display: inline-flex;
+    text-align:left;
+    font-size: 19px;
+    width: 81%;
+    color: #ffffff;
+    align-items: center;
+}
+
+
+.cl-back-button{
+    background: url('../../../assets/back_white.png') center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    margin-right: 15px;
+}
+
+.column {
+    float: left;
+    border-radius: 5px;
+    width: 50%;
+    padding: 5px;
+    margin-top:-5px;
+  }
+
+
+.nextButton{
+    background-color: #152a3f;
+    color: white;
+    width:30%;
+     margin-left:35%; 
+     margin-right:35%;
+      padding:5px; 
+    font-size:18px;
+    // position: absolute;
+    // right: 10px;
+    }
+
+    .cl_image_div{
+      width:100%; 
+      height:150px;
+      padding-left:10px;
+       padding-right:10px;
+        margin-top:10px;
+    }
+
+    .cl_first_column_img{
+      width:50%; 
+      color:rgb(182, 179, 179);
+      height:100%;
+       border: 1px solid rgb(212, 209, 209);
+       margin-right:10px;
+       border-radius:10px;
+    }
+
+    .cl_images{
+      width:40%; 
+      height:40%;
+      color:rgb(182, 179, 179);
+    }
+
+    .cl_display_img{
+      width:100%;
+       height:100%; 
+       border-radius:10px;
+    }
+
+    .cl_second_column_img{
+      width:50%;
+       height:100%;
+       color:rgb(182, 179, 179);
+        border: 1px solid rgb(212, 209, 209);
+         border-radius:10px;
+    }
+
+
+    .cl_bottom_nav_css{
+      width:24px;
+      height:24px;
+      // color:gray;
+    
+      width:100%;
+      color:gray;
+      // padding-top:5px;
+      // padding-bottom:5px;
+      background-color: #ffffff;
+    }
+    
+    .cl_bottom_fix{
+      position: fixed; 
+      bottom:0px;
+      width:100%;
+      padding:8px;
+       border-top:1px solid #f1f4f9;
+        background-color: white;
+    }
+    
+    .cl_post_css{
+      width:100%;
+      width:24px;
+      height:24px;
+      color: #fb7645;
+      // padding-top:5px;
+      // padding-bottom:5px;
+      background-color: #ffffff;
+     
+    }
+    
+    .cl_text_font{
+      padding-top:4px;
+      font-size: 11px;
+    }
+    
+    .cl_selected-text_font{
+      padding-top:4px;
+      font-size: 11px;
+      color: #fb7645;
+    }

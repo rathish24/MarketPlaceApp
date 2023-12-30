@@ -1,0 +1,53 @@
+
+.cl-back-button{
+    background: url('../../../assets/back_white.png') center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    // margin-right: 15px;
+  }
+  
+  .TitleHeader{
+    width: 100%;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .TitleText{
+    // display: inline-flex;
+    // text-align:left;
+    font-size: 19px;
+    width: 81%;
+    color: #ffffff;
+    margin-left:10px;
+    // align-items: center;
+  }
+
+  .title-css{
+    font-size:17px;
+    color:black;
+    font-weight:470;
+  }
+
+
+  .paymentid-css{
+    font-size:13px;
+    color:gray;
+  }
+
+  .date-css{
+    font-size:10px;
+    color:gray;
+  }
+
+
+  .amount-css{
+    font-size:17px;
+    color:#fe4f14;
+    font-weight:480;
+  }

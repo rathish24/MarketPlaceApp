@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar class="new-background-color" fxLayoutAlign="center center">
+    <ion-row fxLayoutAlign="center center" style="padding:5px">
+      <ion-col size="1">
+        <button ion-button class="cl-back-button" (click)="goBackword()" style="color:white;margin:7px"></button>
+      </ion-col>
+      <ion-col size="11" fxLayoutAlign="start center" fxLayout="row">
+
+        <ion-label style="color:white;" class="TitleText">Notifications</ion-label>
+      </ion-col>
+
+
+      <!-- <ion-col size="2">
+       <ion-icon name="search" style="color:white; height:20px; width: 20px; margin:10px"></ion-icon>
+     </ion-col> -->
+    </ion-row>
+
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+
+<!-- "id": 75,
+"typeOfNotification": 1,
+"title": "string",
+"description": "Create Admin Notification Entry",
+"details": {},
+"isActive": 1,
+"isDeleted": 0,
+"created": "2020-07-04T14:57:41.395Z",
+"modified": "2020-07-04T14:57:41.395Z",
+"userId": 35 -->
+
+<div *ngIf="logsCount > 0 " fxLayout="column" fxFlex="100">
+
+  <ion-card *ngFor="let item of paymentLogsArray" fxLayout="column" (click)="gotoPerticularNotification(item)" fxFlex="100" style="padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;border-radius:8px;margin-top:10px;">
+    <div fxLayout="row" fxFlex="100" style="margin:3px;">
+      <div fxFlex="90">
+        <label class="title-css">{{item.title}}</label>
+      </div>
+      <!-- <div fxFlex="10" fxLayoutAlign="end end">
+        <label class="amount-css">${{item.amount}}</label>
+      </div> -->
+    </div>
+
+    <div fxLayout="row" fxFlex="100" style="margin:3px;">
+      <div fxFlex="80">
+        <label class="paymentid-css">{{item.description}}</label>
+      </div>
+      <!-- <div fxFlex="20" fxLayoutAlign="end end">
+        <label *ngIf="item.isSuccess == 0 " style="color:green;font-size:12px;">Success</label>
+        <label *ngIf="item.isSuccess == 1 " style="color:red;font-size:13px;">Fail</label>
+      </div> -->
+    </div>
+
+
+    <div fxFlex="100" fxLayoutAlign="end center" style="margin:3px;">
+      <div fxFlex="50">
+      </div>
+      <div fxFlex="50"  fxLayoutAlign="end end">
+        <label class="date-css">{{item.created | date}}</label>
+      </div>
+
+
+    </div>
+
+  </ion-card>
+</div>
+ 
+
+<div *ngIf="logsCount == 0 " style="margin-top:20%">
+  <h5 align="center">No records found.</h5>
+</div>
+</ion-content>

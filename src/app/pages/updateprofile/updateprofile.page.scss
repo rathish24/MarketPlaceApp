@@ -1,0 +1,80 @@
+
+.cl-back-button{
+    background: url('../../../assets/back_white.png') center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    // margin-right: 15px;
+  }
+  
+  
+  .TitleHeader{
+    width: 100%;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .floating-label-css{
+    font-size:13px;
+  }
+  
+  .TitleText{
+    // display: inline-flex;
+    // text-align:left;
+    font-size: 19px;
+    width: 81%;
+    color: #ffffff;
+    margin-left:10px;
+    // align-items: center;
+  }
+
+
+.updateProfileButton{
+  background: linear-gradient(to right, #fe4f14,#fe8860,#feae93);
+  // background-color: #fb7645;
+  color: white;
+  // width:28%;
+  padding-left:50px;
+  padding-right:50px;
+  // padding-bottom:5px;
+  // padding-top:5px;
+ 
+   margin-top:10%;
+  
+    font-weight:450;
+    border-radius:25px;
+  font-size:16px;
+}
+
+
+.img-css{
+  width:110px;
+   height:110px; 
+   border-radius: 100%;
+   color:white;
+   margin-top:50px;
+   background:#f1f4f9;
+   border:0.5px solid rgb(155, 153, 153) ;
+   //padding:5px;
+   object-position: center;
+   object-fit: cover;
+
+
+}
+
+.pic-text{
+  color:#fb7645;
+  font-size:15px;
+  font-weight: 450;
+  margin:5px;
+}
+
+
+     .label-text-css{
+      font-size:11px;
+     }

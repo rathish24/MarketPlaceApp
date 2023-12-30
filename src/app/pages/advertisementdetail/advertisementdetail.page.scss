@@ -1,0 +1,157 @@
+
+
+.cl-back-button{
+    background: url('../../../assets/back_white.png') center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 27px;
+    height: 27px;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    // margin-right: 15px;
+}
+
+
+#map_canvas{
+    margin-top:10px;
+    width:100%;
+    margin:auto;
+    height: 25vh;
+  }
+
+//   .material-icons {
+  
+//     font-size: 14px;
+  
+// }
+
+.cl_call_icon{
+  width:18px; 
+  height:18px;
+}
+
+.cl_font_14{
+  font-size:14px;
+}
+
+
+.cl_font_13{
+  font-size:13px;
+}
+
+.cl_chat_icon{
+  font-size:16px; 
+  margin-top:7px;
+}
+
+.cl_message_div{
+  width:50%; 
+  border-right:2px solid white;
+}
+
+
+.cl_call_div{
+  width:50%; 
+}
+
+.cl_call_message_maindiv{
+  width:100%; 
+  position: fixed;
+   bottom :0px; 
+   height:45px; 
+   background-color: #fe4f14;
+   color:white;
+}
+
+.cl_canvas{
+  margin-bottom:20%;
+  margin-top:10px;
+}
+
+.cl_adpost{
+  font-size:14px;
+   color : rgb(78, 77, 77);
+   margin-left:5px;
+}
+
+
+.cl_gray_title{
+  color : rgb(78, 77, 77);
+}
+
+.cl_gray_label{
+  color : rgb(92, 90, 90);
+}
+
+.cl_margin{
+  width:96%;
+  margin-left:2%;
+  margin-right:2%;
+}
+
+.cl_arrow_right{
+  color:black;
+   width:30px;
+    height:30px;
+}
+
+.cl_middle_arrow_left{
+  background: rgba(0, 0, 0, 0.3);
+  color:white;
+  width:30px;
+   height:30px;
+   margin:6px;
+}
+
+
+.cl_middle_arrow_right{
+  color:white;
+  width:30px;
+   height:30px;
+   background: rgba(0, 0, 0, 0.3);
+   margin:7px;
+}
+
+
+
+.cl_default_pic{
+  width:50px; 
+  height:50px;
+  color:#fe4f14;
+}
+
+.cl_img_div{
+  position: relative;
+   height:250px;
+    width:100%;
+    margin:auto;
+}
+
+.cl_header{
+  position: absolute; 
+  top:0px; 
+  height:55px; 
+  width:100%;
+  z-index : 1;
+   background: rgba(0, 0, 0, 0.3);
+}
+
+
+.cl_middle_arrow{
+  position: absolute; 
+  top:120px; 
+  height:55px; 
+  width:100%;
+  z-index : 1;
+}
+
+
+
+.cl_share_icon{
+  width:30px;
+   height:32px;
+  // margin-right:10px;
+  margin-top:-5px;
+  color:rgb(75, 73, 73);
+}

@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Holyhub",
+  "short_name": "Holyhub",
+  "version": "com.holyhub.v1",
+  "description": "An awesome Ionic/Cordova app.",
+  "author": "Ionic Framework Team",
+  "icons": [],
+  "start_url": "index.html"
+}

@@ -1,0 +1,516 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-title style="color:white">Advertisement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <mat-vertical-stepper [linear]="true" #stepper style="padding-bottom:100px;">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" fxLayout="column" (ngSubmit)="form1()" #formone="ngForm">
+        <ng-template matStepLabel>Advertisement Detail</ng-template>
+        <mat-form-field appearance="outline" class="margin-top-css">
+          <mat-label class="floating-label-css">Title</mat-label>
+          <input matInput type="text" formControlName="titleCtrl" required class="text-font-size">
+        </mat-form-field>
+
+        <ion-row
+        style="border: 1px solid #d3d5da;border-radius: 5px;height:60px; padding-left:8px; width:100%; margin-top:5px;margin-bottom:15px">
+        <ion-col size="4" fxLayoutAlign="start center">
+          <label class="floating-label-css" fxLayoutAlign="start center">Price in</label>
+
+        </ion-col>
+
+        <ion-col size="8" fxLayoutAlign="center center">
+          <ion-radio-group (ionChange)="radioGroupChangePrice($event)" formControlName="checkRadioButtonPrice">
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div *ngFor="let item of priceArray" fxLayoutAlign="center center">
+                <ion-radio value="{{item.value}}"></ion-radio>
+                <ion-label fxLayoutAlign="center center" class="floating-label-css" style="margin-left:10px">
+                  {{item.name}}</ion-label>
+              </div>
+            </div>
+          </ion-radio-group>
+
+
+        </ion-col>
+      </ion-row>
+
+
+
+        <mat-form-field appearance="outline" class="margin-top-css">
+          <mat-label class="floating-label-css">Price</mat-label>
+          <input matInput type="number" formControlName="priceCtrl" required class="text-font-size">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="margin-top-css">
+          <mat-label class="floating-label-css">Description</mat-label>
+          <textarea matInput type="text" formControlName="descriptionCtrl" required class="text-font-size"></textarea>
+        </mat-form-field>
+
+        <div fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="start start">
+          <button mat-button class="buttonClass" matStepperNext>Next</button>
+        </div>
+        
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup" fxLayout="column" (ngSubmit)="form2()" #formtwo="ngForm">
+        <ng-template matStepLabel>Contact Details</ng-template>
+        <mat-form-field appearance="outline" class="margin-top-css">
+          <mat-label class="floating-label-css">Email</mat-label>
+          <input matInput type="email" class="text-font-size" formControlName="emailCtrl" required
+            pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        </mat-form-field>
+
+      
+
+        <ion-row
+          style="border: 1px solid #d3d5da;border-radius: 5px;height:60px; padding-left:8px; width:100%; margin-top:5px;margin-bottom:15px">
+          <ion-col size="4" fxLayoutAlign="start center">
+            <label class="floating-label-css" fxLayoutAlign="start center">Gender</label>
+
+          </ion-col>
+
+          <ion-col size="8" fxLayoutAlign="center center">
+            <ion-radio-group (ionChange)="radioGroupChange($event)" formControlName="checkRadioButton">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <div *ngFor="let item of genderArray" fxLayoutAlign="center center">
+                  <ion-radio  checked="true" value="{{item.value}}"></ion-radio>
+                  <ion-label fxLayoutAlign="center center" class="floating-label-css" style="margin-left:10px">
+                    {{item.name}}</ion-label>
+                </div>
+              </div>
+            </ion-radio-group>
+
+
+          </ion-col>
+        </ion-row>
+
+        <label class="floating-label-css" style="color:gray;margin-top:5px;margin-bottom:5px;">
+          If you don’t want to disclose the location, mention nearest area. 
+          Just start typing you
+          will get autocomplete result
+          for address</label>
+        <mat-form-field appearance="outline" class="margin-top-css">
+          <mat-label class="floating-label-css">Address</mat-label>
+          <input matInput class="text-font-size" formControlName="addressCtrl" ngx-google-places-autocomplete
+            #placesRef="ngx-places" name="city" required (onAddressChange)="handleAddressChange($event)">
+        </mat-form-field>
+
+
+        <div fxLayout="row" fxLayoutAlign="center center" style="width:100%;">
+          <mat-form-field class="margin-top-css" style="width:25%; height:82px; margin-right:10px; "
+            appearance="outline">
+            <mat-label class="floating-label-css">Select Code</mat-label>
+           
+            <mat-select name="type" formControlName="countryCodeCtrl" style="font-size:13px;"
+              (selectionChange)="selectCountryCode(selectedCode)" class="filter-select" [(ngModel)]="selectedCode">
+              <mat-select-filter
+               [array]="countryCode"
+               [placeholder]="'Filter'" 
+               [displayMember]="'dial_code'"
+               (filteredReturn)="setFilteredPickupAddresses($event)">
+              </mat-select-filter>
+              <mat-option *ngFor="let code of countryCodeArray" [value]="code.dial_code">
+                +{{code.dial_code}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- <mat-form-field class="margin-top-css" style="width:25%; height:82px; margin-right:10px; "
+          appearance="outline">
+          <mat-label class="floating-label-css">Select Code</mat-label>
+            <input 
+            name="type" formControlName="countryCodeCtrl" style="font-size:13px;"
+            (selectionChange)="selectCountryCode(selectedCode)" class="filter-select" 
+                   matInput
+                   [matAutocomplete]="auto"
+                   [(ngModel)]="selectedCode">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction">
+              <mat-option *ngFor="let code of filteredOptions | async" [value]="code.dial_code">
+                +{{code.dial_code}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> -->
+
+          <mat-form-field appearance="outline" class="margin-top-css" style="width:74%; height:82px; ">
+            <mat-label class="floating-label-css">Mobile</mat-label>
+            <input *ngIf="isOtpRequested == 0 "matInput type="tel" minlength="10" class="text-font-size" maxlength="10" formControlName="mobileCtrl"
+              required >
+              <input  *ngIf="isOtpRequested == 1" matInput type="tel" minlength="10" class="text-font-size" maxlength="10" formControlName="mobileCtrl"
+              required readonly>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" *ngIf="isOtpVerified == 0 " fxLayoutAlign="center center" style="width:100%;">
+
+        
+          <mat-form-field  *ngIf="isOtpRequested == 1 " appearance="outline" class="margin-top-css" style="width:60%; height:82px;margin-right:10px;   ">
+            <mat-label class="floating-label-css">Enter Otp</mat-label>
+            <input matInput  type="number" class="text-font-size" minlength="4" maxlength="4" formControlName="otpCtrl"
+              required>
+          </mat-form-field>
+
+          <div   style="width:39%;margin-bottom:5px;margin-right: 10px;">
+            <button *ngIf="isOtpRequested == 0 "  mat-button  (click)="sendOtp(0)"  class="buttonClass">Verify Mobile</button>
+            <button *ngIf="isOtpRequested == 1 " mat-button (click)="verifyOtp()"  class="buttonClass">Verify Otp</button>
+          </div>
+
+       
+
+        </div>
+
+        <div *ngIf="isOtpRequested == 1 && isOtpVerified == 0"  fxLayout="row" fxLayoutAlign="center center" style="width:100%;">
+
+          <label class="floating-label-css-underline"  (click)="editMobile()" >
+            <u>Edit Mobile</u> </label>
+
+            <label class="floating-label-css-underline1" (click)="sendOtp(1)" >
+              <u>Resend Otp</u> </label>
+          </div>
+
+        <div fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="start start">
+          <button mat-button class="buttonBackClass" matStepperPrevious>Back</button>
+          <button *ngIf="isOtpVerified ==1" mat-button class="buttonClass" matStepperNext>Next</button>
+        </div>
+        
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup" fxLayout="column" (ngSubmit)="form3()" #formthree="ngForm">
+        <ng-template matStepLabel>Images Upload</ng-template>
+        <label class="desc-text" style="color:gray;margin-top:5px;">We recommend uploading image aspect ratio as
+          2:1</label>
+
+
+        <div class="cl_image_div" style="margin-top:20px;" fxLayout="row">
+          <div fxLayout="column" style="position:relative" fxLayoutAlign="center center" class="cl_first_column_img"
+           >
+            <div  class="closeButtonOnImage"
+            (click)="clearImage(1)">
+            <ion-icon *ngIf="firstImage != '' "  style="color:#fb7645;width:23px;height:23px;" name="close-outline"></ion-icon>
+            </div>
+            <ion-icon *ngIf="firstImage == '' " name="camera"  onclick="document.getElementById('image_upload1').click()" class="cl_images"></ion-icon>
+              <label class="floating-label-css"  onclick="document.getElementById('image_upload1').click()" *ngIf="firstImage == '' " align="center">Upload Image</label>
+              <img *ngIf="firstImage != '' "  onclick="document.getElementById('image_upload1').click()" src="{{firstImage}}" class="cl_display_img">
+          </div>
+
+
+          <div fxLayout="column" style="position:relative"  fxLayoutAlign="center center" class="cl_second_column_img"
+            >
+            <div  class="closeButtonOnImage"
+            (click)="clearImage(2)">
+            <ion-icon *ngIf="secondImage != '' "  style="color:#fb7645;width:23px;height:23px;" name="close-outline"></ion-icon>
+           </div>
+            <ion-icon *ngIf="secondImage == '' " name="camera" onclick="document.getElementById('image_upload2').click()" class="cl_images"></ion-icon>
+            <label class="floating-label-css" onclick="document.getElementById('image_upload2').click()" *ngIf="secondImage == '' " align="center">Upload Image</label>
+            <img *ngIf="secondImage != '' " onclick="document.getElementById('image_upload2').click()" src="{{secondImage}}" class="cl_display_img">
+          </div>
+        </div>
+
+        <div class="cl_image_div" fxLayout="row">
+          <div fxLayout="column" style="position:relative" fxLayoutAlign="center center" class="cl_first_column_img"
+            >
+           
+            <div  class="closeButtonOnImage"
+            (click)="clearImage(3)">
+            <ion-icon *ngIf="thirdImage != '' "  style="color:#fb7645;width:23px;height:23px;" name="close-outline"></ion-icon>
+           </div>
+            <ion-icon *ngIf="thirdImage == '' " name="camera" onclick="document.getElementById('image_upload3').click()" class="cl_images"></ion-icon>
+            <label class="floating-label-css" onclick="document.getElementById('image_upload3').click()" *ngIf="thirdImage == '' " align="center">Upload Image</label>
+            <img *ngIf="thirdImage != '' " onclick="document.getElementById('image_upload3').click()" src="{{thirdImage}}" class="cl_display_img">
+          </div>
+
+          <div fxLayout="column" style="position:relative" fxLayoutAlign="center center" class="cl_second_column_img"
+            >
+            <div  class="closeButtonOnImage"
+            (click)="clearImage(4)">
+            <ion-icon *ngIf="fourthImage != '' "  style="color:#fb7645;width:23px;height:23px;" name="close-outline"></ion-icon>
+           </div>
+            <ion-icon *ngIf="fourthImage == '' " name="camera" onclick="document.getElementById('image_upload4').click()" class="cl_images"></ion-icon>
+            <label class="floating-label-css" onclick="document.getElementById('image_upload4').click()" *ngIf="fourthImage == '' " align="center">Upload Image</label>
+            <img *ngIf="fourthImage != '' " onclick="document.getElementById('image_upload4').click()" src="{{fourthImage}}" class="cl_display_img">
+          </div>
+        </div>
+
+        <div class="cl_image_div" fxLayout="row">
+          <div fxLayout="column" style="position:relative" fxLayoutAlign="center center" class="cl_first_column_img"
+            >
+            
+            <div  class="closeButtonOnImage"
+            (click)="clearImage(5)">
+            <ion-icon *ngIf="fifthImage != '' "  style="color:#fb7645;width:23px;height:23px;" name="close-outline"></ion-icon>
+           </div>
+            
+            <ion-icon *ngIf="fifthImage == '' " name="camera" onclick="document.getElementById('image_upload5').click()" class="cl_images"></ion-icon>
+            <label class="floating-label-css" onclick="document.getElementById('image_upload5').click()" *ngIf="fifthImage == '' " align="center">Upload Image</label>
+            <img *ngIf="fifthImage != '' " onclick="document.getElementById('image_upload5').click()" src="{{fifthImage}}" class="cl_display_img">
+          
+          
+          </div>
+
+        </div>
+
+        <input style="display: none;" id="image_upload1" type="file" (change)="detectEventGallery($event,0)">
+        <input style="display: none;" id="image_upload2" type="file" (change)="detectEventGallery($event,1)">
+        <input style="display: none;" id="image_upload3" type="file" (change)="detectEventGallery($event,2)">
+        <input style="display: none;" id="image_upload4" type="file" (change)="detectEventGallery($event,3)">
+        <input style="display: none;" id="image_upload5" type="file" (change)="detectEventGallery($event,4)">
+
+
+        <div fxFlex="100" fxLayoutGap="15px" style="margin-top:20px;" fxLayoutAlign="start start">
+          <button mat-button class="buttonBackClass" matStepperPrevious>Back</button>
+          <button mat-button class="buttonClass" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup">
+      <form [formGroup]="fourthFormGroup" fxLayout="column" (ngSubmit)="form4()" #formfour="ngForm">
+        <ng-template matStepLabel>Filter Detail</ng-template>
+
+        <mat-form-field appearance="outline" style="width:100%" class="margin-top-css">
+          <mat-label class="floating-label-css">Select Category</mat-label>
+
+          <mat-select style="font-size:13px;" name="type" formControlName="categoryId"
+            (selectionChange)="selectCategoryType(categoryId)" class="filter-select" [(value)]="categoryId">
+            <mat-option *ngFor="let type of categoryArray" [value]="type.id">
+              {{type.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width:100%" class="margin-top-css">
+          <mat-label class="floating-label-css">Select Sub Category</mat-label>
+
+          <mat-select style="font-size:13px;" name="type" formControlName="subCategoryId"
+            (selectionChange)="selectSubCategoryType(subCategoryId)" class="filter-select" [(value)]="subCategoryId">
+            <mat-option *ngFor="let type of subCategoryArray" [value]="type.id">
+              {{type.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width:100%;" appearance="outline" class="margin-top-css">
+          <mat-label class="floating-label-css">Tags</mat-label>
+          <mat-select #matSelect1  style="font-size:13px;" name="tag" formControlName="selectedTags"
+            (selectionChange)="selectedTags(selectedTags)" class="filter-select" [(value)]="selectedTags" multiple>
+            <mat-option *ngFor="let tag of tagsArray" [value]="tag.name">
+              {{tag.name}}
+            </mat-option>
+
+            <div fxFlex="100" fxLayoutGap="15px" style="margin-bottom:10px;" fxLayoutAlign="center center">
+            <button style="align-items: center;align-self:center;margin-bottom: 10px;" mat-button class="buttonClass" (click)="closeDropdown(matSelect1)"  >Submit</button>
+
+          </div>
+          </mat-select>
+          <!-- <div fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="start start">
+            <button mat-button class="buttonBackClass" matStepperPrevious>Back</button>
+            <button mat-button class="buttonClass" matStepperNext>Next</button>
+          </div> -->
+          
+        </mat-form-field>
+
+        <mat-form-field style="width:100%;" appearance="outline" class="margin-top-css">
+          <mat-label class="floating-label-css">Languages you support</mat-label>
+          <mat-select #matSelect style="font-size:13px;" name="year" formControlName="selectedLanguages"
+            (selectionChange)="selectedChanged(selectedLanguages)" class="filter-select" [(value)]="selectedLanguages"
+            multiple>
+            <mat-option *ngFor="let year of languageArray" [value]="year.name">
+              {{year.name}}
+            </mat-option>
+            <div fxFlex="100" fxLayoutGap="15px" style="margin-bottom:10px;" fxLayoutAlign="center center">
+              <button style="align-items: center;align-self:center;margin-bottom: 10px;" mat-button class="buttonClass" (click)="closeDropdown(matSelect)"  >Submit</button>
+  
+            </div>
+          </mat-select>
+        </mat-form-field>
+        <div fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="start start">
+          <button mat-button class="buttonBackClass" matStepperPrevious>Back</button>
+          <button mat-button class="buttonClass" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fifthFormGroup" *ngIf="postStatus == '1' ">
+      <form [formGroup]="fifthFormGroup" fxLayout="column" #formfour="ngForm">
+        <ng-template matStepLabel>Dates</ng-template>
+
+        <div fxFlex="100" fxLayoutGap="5" fxLayout="row">
+          <ion-card class="expiryCard-css" fxFlex="49" fxLayout="column" fxLayoutAlign="center center">
+            <div fxLayout="column" *ngIf="adRemainingDays != 0 " fxLayoutAlign="center center">
+              <label class="padding1px">{{adRemainingDays}} days remaining.</label>
+              <label class="padding1px">Advertisement plan</label>
+              <label class="padding1px">expires on</label>
+              <label class="padding1px"><b>{{getEndDateForUpdate | date }}</b></label>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center center" *ngIf="adRemainingDays == 0 ">
+              <label class="padding1px">Advertisement plan</label>
+              <label class="padding1px">expired on</label>
+              <label class="padding1px"><b>{{getEndDateForUpdate | date }}</b></label>
+              <label class="padding1px">please renew it</label>
+              <!-- <label class="padding12px"> Your advertisement plan expires on <b>{{getEndDateForUpdate | date}}</b>, please renew
+                it</label> -->
+
+            </div>
+
+          </ion-card>
+
+          <ion-card class="expiryCard-css" fxFlex="49" fxLayout="column" fxLayoutAlign="center center" *ngIf="checkBannerEndDateTimestamp != 0 ">
+            <div fxLayout="column" *ngIf="bannerRemainingDays != 0 " fxLayoutAlign="center center">
+              <label class="padding1px">{{bannerRemainingDays}} days remaining.</label>
+              <label class="padding1px">Banner plan</label>
+              <label class="padding1px">expires on</label>
+              <label class="padding1px"><b>{{getEndDateForUpdateBanner | date }}</b></label>
+            </div>
+            <!-- <div fxLayout="column" *ngIf="bannerRemainingDays == 0 ">
+              <label class="padding12px"> Your banner plan expires on <b>{{getEndDateForUpdateBanner | date}}</b>, please renew
+                it</label>
+                
+            </div> -->
+
+            <div fxLayout="column" fxLayoutAlign="center center" *ngIf="bannerRemainingDays == 0 ">
+              <label class="padding1px">Banner plan</label>
+              <label class="padding1px">expired on</label>
+              <label class="padding1px"><b>{{getEndDateForUpdateBanner | date }}</b></label>
+              <label class="padding1px">please renew it</label>
+              <!-- <label class="padding12px"> Your advertisement plan expires on <b>{{getEndDateForUpdate | date}}</b>, please renew
+                it</label> -->
+
+            </div>
+          </ion-card>
+          <!-- <ion-card class="expiryCard-css" fxFlex="48">
+            <label class="line">Banner plan expires on <b>{{getEndDateForUpdateBanner | date }}</b></label>
+          </ion-card> -->
+        </div>
+
+
+        <!-- <ion-row style="margin:5px;margin-top:10px;">
+          <ion-col size="5">
+            <label style="color:rgb(66, 65, 65);font-size:12px;">Advertisement - </label>
+          </ion-col>
+          <ion-col size="7">
+            <label style="color:rgb(66, 65, 65);font-size:12px;">{{getStartDateForUpdate | date}} &nbsp; <b>-</b>
+              &nbsp; {{getEndDateForUpdate | date }}</label>
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin:5px;" *ngIf="checkBannerEndDateTimestamp != 0 ">
+          <ion-col size="5">
+            <label style="color:rgb(66, 65, 65);font-size:12px;">Banner - </label>
+          </ion-col>
+          <ion-col size="7">
+            <label style="color:rgb(66, 65, 65);font-size:12px;">{{getStartDateForUpdateBanner | date}} &nbsp;
+              <b>-</b> &nbsp; {{getEndDateForUpdateBanner | date}}</label>
+          </ion-col>
+        </ion-row> -->
+
+
+
+        <div fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="start start" style="margin-top:15px;">
+          <button mat-button class="buttonBackClass" matStepperPrevious>Back</button>
+          <button mat-button class="buttonClass" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="sixthFormGroup">
+      <form [formGroup]="sixthFormGroup" fxLayout="column" (ngSubmit)="form5()" #formfive="ngForm">
+        <ng-template matStepLabel>Payment</ng-template>
+
+
+
+        <div style="padding-bottom:10px;" fxLayout="column">
+
+          <label class="desc-text" style="margin-top:15px;margin-bottom:10px;font-weight:400">Advertisement
+            Plans</label>
+
+
+          <div fxLayout="row wrap">
+            <div *ngFor="let item of plansArray">
+              <ion-card *ngIf="item.isAdvertisement == 0 " fxLayout="column"
+                [ngClass]="(adPlanName == item.name) ? 'card-one' : 'card-two' " fxLayoutAlign="center center"
+                class="card-css" (click)="checkAdveriseMentPriceCard(item.name,item.price,item.noOfDays,item.id)">
+                <label [ngClass]="(adPlanName == item.name) ? 'h-css-one' : 'h-css-two' "
+                  style="font-size:17px;font-weight:450">${{item.price}}</label>
+                <label [ngClass]="(adPlanName == item.name) ? 'label-css-one' : 'label-css-two' "
+                  fxLayoutAlign="center center"
+                  style="font-size:11px;font-weight:400;margin-top:6px;">{{item.name}}</label>
+
+              </ion-card>
+            </div>
+
+          </div>
+
+          <label class="desc-text" style="margin-top:10px;margin-bottom:10px;font-weight:400">Banner Plans</label>
+
+          <div fxLayout="row wrap">
+            <div *ngFor="let item of plansArray">
+              <ion-card *ngIf="item.isAdvertisement == 1 " fxLayout="column"
+                [ngClass]="(bannerPlanName == item.name) ? 'card-one' : 'card-two' " 
+                class="card-css" >  
+                <ion-icon  (click)="deselectBannerPlan()" class="closeButtonEnd" name="close-outline"></ion-icon>  
+                <label fxLayoutAlign="center center" (click)="checkBannerPriceCard(item.name,item.price,item.noOfDays,item.id)" [ngClass]="(bannerPlanName == item.name) ? 'h-css-one' : 'h-css-two' "
+                  style="font-size:17px;font-weight:450">${{item.price}}</label>
+                <label fxLayoutAlign="center center" (click)="checkBannerPriceCard(item.name,item.price,item.noOfDays,item.id)" [ngClass]="(bannerPlanName == item.name) ? 'label-css-one' : 'label-css-two' "
+                  fxLayoutAlign="center center"
+                  style="font-size:11px;font-weight:400;margin-top:6px;">{{item.name}}</label>
+              </ion-card>
+            </div>
+          </div>
+
+          <div fxFlex="100" *ngIf="totalCalculatePayment != 0 " style="margin-top:15px;padding:10px;">
+            <label style="color:#fb7645">Total : $ {{totalCalculatePayment}} </label>
+
+          </div>
+
+
+        </div>
+        <div fxFlex="100">
+          <button class="buttonPayClass" type="reset" *ngIf="totalCalculatePayment == 0"
+            (click)="submmitAdvertisementData();stepper.reset()">Submit</button>
+
+            <button class="buttonPayClass" type="submit" *ngIf="advertisementStatus == update"
+            (click)="submmitAdvertisementData()">Update</button>
+
+          <button class="buttonPayClass" *ngIf="totalCalculatePayment != 0 " (click)="submmitAdvertisementData()">Pay
+            with RazorPay</button>
+        </div>
+
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+
+  <div class="cl_bottom_fix" fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="home()">
+      <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">HOME</label>
+    </div>
+
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="openChatList()">
+      <ion-icon class="cl_bottom_nav_css" name="document" (click)="openChatList()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">CHATS</label>
+    </div>
+
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="postAdvertisement()">
+      <ion-icon class="cl_post_css" name="add-circle" (click)="postAdvertisement()">
+      </ion-icon>
+      <label fxLayoutAlign="center center" class="cl_selected-text_font">SELL</label>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="openFavourite()">
+      <ion-icon class="cl_bottom_nav_css" name="heart" (click)="openFavourite()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">MY ADS</label>
+    </div>
+
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="openProfile()">
+      <ion-icon class="cl_bottom_nav_css" name="person" (click)="openProfile()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">PROFILE</label>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,57 @@
+{
+  "_from": "com.razorpay.cordova",
+  "_id": "com.razorpay.cordova@1.4.11",
+  "_inBundle": false,
+  "_integrity": "sha512-VSosVZkqYLC5oLavQpnq2gg+/H3dvTAkBjIHcBPahaWazqo/w1UKGvoytg9D5uewIGxQKhYgsCQHiJ0UwMaf2A==",
+  "_location": "/com.razorpay.cordova",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "com.razorpay.cordova",
+    "name": "com.razorpay.cordova",
+    "escapedName": "com.razorpay.cordova",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/com.razorpay.cordova/-/com.razorpay.cordova-1.4.11.tgz",
+  "_shasum": "2324c5ed07da0bdf81840efcf452f219d4df57c4",
+  "_spec": "com.razorpay.cordova",
+  "_where": "/home/dhananjayraut/Desktop/ionic4-marketplace",
+  "author": {
+    "name": "Razorpay Developers",
+    "email": "developers@razorpay.com",
+    "url": "https://razorpay.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/razorpay/razorpay-cordova/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Cordova/Phonegap bindings for Razorpay's Mobile SDKs",
+  "homepage": "https://github.com/razorpay/razorpay-cordova#readme",
+  "keywords": [
+    "razorpay",
+    "ecosystem:cordova",
+    "cordova",
+    "phonegap",
+    "ionic",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-browser"
+  ],
+  "license": "ISC",
+  "main": "Readme.md",
+  "name": "com.razorpay.cordova",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razorpay/razorpay-cordova.git"
+  },
+  "scripts": {},
+  "version": "1.4.11"
+}

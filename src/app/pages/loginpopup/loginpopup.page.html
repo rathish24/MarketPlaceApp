@@ -1,0 +1,51 @@
+
+<ion-header>
+  <ion-toolbar >
+    <ion-title style="color:#fb7645">Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<form #userForm="ngForm" style="width:100%;margin-top:10px">
+ 
+
+  <div fxLayout="column" fxLayoutAlign="  center center" style="width:100%;margin-top:5px">
+    <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;margin-top:10px" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="" [(ngModel)]="email" 
+          name="email" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+        <mat-error>
+          <div class="form-group">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+              Email Is Requird
+            </div>
+          </div>
+        </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;margin-top:5px" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="" type="password" [(ngModel)]="password" 
+          name="password" required  
+        >
+        <mat-error>
+          <div class="form-group">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)">
+               Password Is Requird
+            </div>
+          </div>
+        </mat-error>
+    </mat-form-field>
+
+  </div>
+
+  
+  </form>
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top:10px;width:100%">
+    <button fxFlex="45" mat-raised-button (click)="closeDialog()" style="margin-right:15px;font-size:13px">CANCEL</button>
+    <button fxFlex="45" mat-raised-button (click)="submit()" class="loginButton" style="font-size:13px" [disabled]="email.invalid">Login</button>
+  </div>
+
+
+
+

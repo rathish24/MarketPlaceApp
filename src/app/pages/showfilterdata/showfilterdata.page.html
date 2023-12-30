@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-row>
+      <ion-col size="2">
+        <button ion-button class="cl-back-button" (click)="goBackword()" style="color:white;margin:7px"></button>
+      </ion-col>
+      <ion-col size="10" class="TitleHeader TitleText">
+        <ion-label style="color:white; margin-left:-15px">Filter</ion-label>
+      </ion-col>
+  
+    </ion-row>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div style="width:100%; height:100%">
+    <div style="width:96%;margin-left:2%; margin-right:2%">
+
+      <div class="row" *ngFor="let item of categoryArray" >
+        <div class="column" style="position:relative">
+          
+        <ion-card style="border-radius: 5px;width:100%; height:100%; margin:auto; margin-top:10px" (click)="applyFilter(item.id, item.name)"  [ngClass]="(categoryName == item.id) ? 'card-one' : 'card-two' " fxLayoutAlign="center center">
+          <!-- <div >
+            <mat-checkbox slot="end"
+            [(ngModel)]="item.isChecked" 
+            (ionChange)="checkEvent()"></mat-checkbox>
+          </div> -->
+          <div fxLayout="column" fxLayoutAlign="center center" style="margin-top:20px">
+          
+            <img src={{item.image}} style="border-radius: 5px;width:50px; height:50px"/>
+            <h5 align="center">{{item.name}}</h5>
+          </div>
+         
+        </ion-card>
+        </div>
+  
+      </div>
+  
+  
+    </div>
+  
+  </div>
+  
+</ion-content>

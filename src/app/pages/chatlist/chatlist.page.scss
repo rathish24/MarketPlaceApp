@@ -1,0 +1,121 @@
+.masters {
+    --background: linear-gradient(to bottom, #152a3f 0%, #66ccff 100%);
+  }
+
+
+  .cl_bottom_nav_css{
+    width:24px;
+    height:24px;
+    // color:gray;
+  
+    width:100%;
+    color:gray;
+    // padding-top:5px;
+    // padding-bottom:5px;
+    background-color: #ffffff;
+  }
+  
+  .cl_bottom_fix{
+    position: fixed; 
+    bottom:0px;
+    width:100%;
+    padding:8px;
+     border-top:1px solid #f1f4f9;
+      background-color: white;
+  }
+  
+  .cl_post_css{
+    width:100%;
+    width:24px;
+    height:24px;
+    color: #fb7645;
+    // padding-top:5px;
+    // padding-bottom:5px;
+    background-color: #ffffff;
+   
+  }
+  
+  .cl_text_font{
+    padding-top:4px;
+    font-size: 14px;
+  }
+  
+  .cl_selected-text_font{
+    padding-top:4px;
+    font-size: 14px;
+    color: #fb7645;
+  }
+
+.back-div{
+    background-size: cover;
+    height:100%;
+    background-repeat: no-repeat;
+    // position: relative;
+    width:100%;
+    background: linear-gradient(to bottom,#f35b28, #f7906e,#feae93);
+    // background-image: url("../../../assets/loginbg.png");
+    // background: url("../../../assets/loginbg.png") no-repeat center center fixed;
+  }
+
+  .item-content {
+    background-color:#000000;
+  }
+
+  ion-item{
+    --background:transparent;
+  }
+
+
+input {
+  border: none;
+}
+
+
+input:focus {
+  outline: none;
+}
+
+
+.cl_add_course_css{
+  border: 1px solid grey;
+  // padding-top:10px;
+  // padding-bottom:10px;
+  // padding-left:13px;
+  // padding-right:13px;
+  border-radius: 22px;
+  padding-left:15px;
+    margin:20px;
+       cursor: pointer;
+}
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+
+.cl-back-button{
+  background: url('../../../assets/back_white.png') center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  outline: 0;
+  box-shadow: 0 0 0 0;
+  // margin-right: 15px;
+}
+
+.back-icon-css{
+  width:28px;
+ color:#f35b28;
+  height:28px;
+}
+
+.close-icon-css{
+  width:34px;
+  color:gray;
+   height:34px;
+}

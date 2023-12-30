@@ -1,0 +1,103 @@
+
+<ion-header>
+  <ion-toolbar >
+    <ion-title style="color:#fb7645">Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+<form #userForm="ngForm" style="width:100%;margin-top:10px">
+ 
+
+  <div fxLayout="column" fxLayoutAlign="  center center" style="width:100%;margin-top:5px">
+    <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;margin-top:10px" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="" [(ngModel)]="email" 
+          name="email" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+        <mat-error>
+          <div class="form-group">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+              Email Is Requird
+            </div>
+          </div>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;margin-top:5px" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="" [(ngModel)]="name" 
+          name="name" required  
+        >
+        <mat-error>
+          <div class="form-group">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+               Name Is Requird
+            </div>
+          </div>
+        </mat-error>
+    </mat-form-field>
+
+    <ion-row
+    style="border: 1px solid #d3d5da;border-radius: 5px;height:55px; padding-left:8px; width:100%; margin-top:5px;margin-bottom:15px">
+    <ion-col size="4" fxLayoutAlign="start center">
+      <label class="floating-label-css" fxLayoutAlign="start center">Gender</label>
+
+    </ion-col>
+
+    <ion-col size="8" fxLayoutAlign="center center">
+      <ion-radio-group (ionChange)="radioGroupChange($event)" [(ngModel)]="gender" >
+        <div fxLayout="row" fxLayoutGap="10px">
+          <div *ngFor="let item of genderArray" fxLayoutAlign="center center">
+            <ion-radio  checked="true" value="{{item.value}}"></ion-radio>
+            <ion-label fxLayoutAlign="center center" class="floating-label-css" style="margin-left:10px">
+              {{item.name}}</ion-label>
+          </div>
+        </div>
+      </ion-radio-group>
+
+
+    </ion-col>
+  </ion-row>
+
+
+    <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;margin-top:5px" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="" type="password" [(ngModel)]="password" 
+          name="password" required  
+        >
+        <mat-error>
+          <div class="form-group">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)">
+               Password Is Requird
+            </div>
+          </div>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;margin-top:5px" appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput placeholder="" type="password" [(ngModel)]="confirmPassword" 
+          name="confirmPassword" required  
+        >
+        <mat-error>
+          <div class="form-group">
+            <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+               Confirm password Is Requird
+            </div>
+          </div>
+        </mat-error>
+    </mat-form-field>
+    
+  </div>
+
+  
+  </form>
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top:10px;width:100%">
+    <button fxFlex="45" mat-raised-button (click)="closeDialog()" style="margin-right:15px;font-size:13px">CANCEL</button>
+    <button fxFlex="45" mat-raised-button (click)="submit()" class="loginButton" style="font-size:13px" [disabled]="name.invalid">SUBMIT</button>
+ 
+
+  </div>
+
+
+
+

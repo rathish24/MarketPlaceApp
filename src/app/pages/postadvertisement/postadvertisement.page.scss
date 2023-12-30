@@ -1,0 +1,110 @@
+
+.masters {
+    --background: #f1f4f9;
+  }
+
+  .TitleHeader{
+    width: 100%;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+}
+.TitleText{
+    display: inline-flex;
+    text-align:left;
+    font-size: 19px;
+    width: 81%;
+    color: #ffffff;
+    align-items: center;
+}
+
+
+.cl-back-button{
+    background: url('../../../assets/back_white.png') center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    margin-right: 15px;
+}
+
+
+.loginButton{
+    background-color: #152a3f;
+    color: white;
+    width:28%;
+     margin-left:35%; 
+     margin-right:35%;
+     margin-top:5%;
+      padding-top:5px;
+      margin-bottom:15%;
+      padding-bottom: 5px; 
+    font-size:18px;
+  }
+
+
+  .cl_bottom_nav_css{
+    width:24px;
+    height:24px;
+    // color:gray;
+  
+    width:100%;
+    color:gray;
+    // padding-top:5px;
+    // padding-bottom:5px;
+    background-color: #ffffff;
+  }
+  
+  .cl_bottom_fix{
+    position: fixed; 
+    bottom:0px;
+    width:100%;
+    padding:8px;
+     border-top:1px solid #f1f4f9;
+      background-color: white;
+  }
+  
+  .cl_post_css{
+    width:100%;
+    width:24px;
+    height:24px;
+    color: #fb7645;
+    // padding-top:5px;
+    // padding-bottom:5px;
+    background-color: #ffffff;
+   
+  }
+  
+  .cl_text_font{
+    padding-top:4px;
+    font-size: 11px;
+  }
+  
+  .cl_selected-text_font{
+    padding-top:4px;
+    font-size: 11px;
+    color: #fb7645;
+  }
+
+  // ion-content{
+  //   --background: #f1f4f9 !important;   
+  // }
+  
+
+// ::ng-deep {
+//   .mat-form-field-flex {
+  
+//     background-color: #ffffff !important;
+//   }
+// }
+
+
+// ion-content{
+
+  // --background: url("../../../assets/BG.png");
+  // --background-repeat: no-repeat;
+// background-image: linear-gradient(to bottom, #9826f5 0%, #ca95f6 74%);
+// }

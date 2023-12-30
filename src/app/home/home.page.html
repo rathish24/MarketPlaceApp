@@ -1,0 +1,308 @@
+<ion-header class="new-background-color">
+  <ion-toolbar class="new-background-color">
+    <ion-row>
+      <ion-col size="4" (click)="showPopup()" fxLayoutAlign="start center">
+        <mat-icon style="font-size:22px;color:white;position:fixed;left:10px;cursor: pointer;margin-top:2px">room</mat-icon>
+        <label style="color:white;margin-left:28px;font-size:15px;cursor: pointer;margin-top:2px">{{cityName}}</label>
+
+      </ion-col>
+      <ion-col size="6" fxLayoutAlign="start center">
+        <label style="color:white; font-size:22px; margin-left: 20px ;margin-top:2px">Holyhub</label>
+      </ion-col>
+
+      <ion-col size="2" fxLayoutAlign="center center">
+        <img src="{{languageImage}}" [matMenuTriggerFor]="menu" class="languageImg" />
+        <!-- <mat-icon [matMenuTriggerFor]="menu"
+      style="position: fixed; right:22px;color:white;font-size:20px; bottom : 15px;cursor: pointer;">
+      g_translate</mat-icon> -->
+        <mat-menu #menu="matMenu">
+          <div fxLayout="row" style="margin-top:10px;" *ngFor="let language of Languages"
+            [ngClass]="language.image == languageImage ? 'selected-category-back' : 'category-back' "
+            (click)="getLanguage(language)">
+            <button fxLayout="row" mat-button style="padding:5px;">
+              <ion-row>
+                <img src="{{language.image}}" style="width:20px; height:20px" />
+                <label style="height: 30px;" mat-menu-item>{{language.name}}</label>
+              </ion-row>
+            </button>
+          </div>
+        </mat-menu>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-toolbar class="new-background-color">
+    <ion-row>
+      <ion-col size="10" fxLayoutAlign="center center">
+        <ion-searchbar 
+        (click)="ISO=true"
+        [formControl]="searchControl" 
+        showCancelButton="focus" 
+        (ionCancel)="ISO=false"
+        ></ion-searchbar>
+      </ion-col>
+      <ion-col size="2" (click)="notifications()"  fxLayoutAlign="center center">
+        <!-- <img src="{{languageImage}}" [matMenuTriggerFor]="menu" class="notifImg" /> -->
+      <ion-icon class="notifImg"  name="notifications-outline"></ion-icon>
+    </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <div *ngIf="loadingBlock">
+  <div class="loadingBlockAuth-wrapper">
+    <div class="loadingBlock-box">
+
+     
+      <div class="loaderrr"></div>
+      <div class="text">
+         &nbsp;&nbsp;Please Wait
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<ion-content padding *ngIf="ISO">
+  
+  <ion-list>
+    <ion-item (click)="showAdvertisementDetail(item.categoryId,item.id,item.isBookmarked,item.name)" *ngFor="let item of items">
+      {{ item.title }}
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+
+<ion-content [fullscreen]="true" *ngIf="!ISO">
+ 
+  <div style="background-color:white" class="cl_margin100">
+
+    <div>
+      <ion-slides [options]="slideOptions"  (ionSlideDidChange)="onSlideChanged(slider)"   pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)"
+        class="half-black"   >
+        <ion-slide *ngFor="let item of bannerArray"   
+          (click)="showAdvertisementDetail(item.categoryId, item.advertisementId, item.isBookmarked,item.id)">
+         
+          <div *ngIf="bannerCount != 0 " class="cl_img_div">
+            <img src="{{item.image}}" class="cl_margin100" />
+
+            <div fxLayout="column" fxLayoutAlign="end end" class="checkBack"
+              style="background-image: linear-gradient(to bottom, transparent 15%, rgb(0, 0, 0,1)) ;">
+
+
+              <div fxLayout="row" fxLayoutAlign="start start" class="cl_name_css">
+                <label style="font-size:18px;">{{item.title}}</label>
+              </div>
+              <div class="sub_div">
+                <ion-row>
+                  <ion-col size="8" fxLayoutAlign="start end">
+
+
+                    <div fxLayoutAlign="start start">
+                      <label class="check_width" style="font-size:15px">{{item.description}}</label>
+                    </div>
+                  </ion-col>
+                  <ion-col size="4" fxLayoutAlign="end center">
+                    <div class="show_width">
+                      <label style="font-size:15px">{{item.city}}</label>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+          </div>
+          <!-- <div *ngIf="showNoBanner == 1 " class="cl_img_div">
+            <h3 align="center">No banners available</h3>
+          </div> -->
+        </ion-slide>
+      </ion-slides>
+
+
+      <div fxLayoutAlign="center center" *ngIf="showNoBanner == 1 " class="cl_img_div" style="background-color:rgb(175, 171, 171);">
+        <h5 align="center">No banners posted</h5>
+      </div>
+
+    </div>
+
+
+
+    <div style="width:100%; background-color:white;margin-top:10px; height:auto">
+
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom:10px;width:100%;">
+        <div style="width:10%;" fxLayoutAlign="end center" (click)="filter()">
+          <!-- <mat-icon  *ngIf="noInternet == '0' "  style="font-size:40px;color:#fb7645;margin-top:-30px;">filter_list</mat-icon> -->
+          <!-- <ion-icon *ngIf="noInternet == '0' " name="options" style="width:35px;height:50px;color:#fb7645;margin-top:-10px" (click)="filter()"></ion-icon> -->
+          <img *ngIf="noInternet == '0' " src="../../assets/newimgfilter.png"
+            style="width:25px;height:35px;color:#fb7645;"  />
+        </div>
+        <div  style="overflow-x: scroll;width:87%" fxLayout="row" id="container1">
+          <div fxLayout="column" fxLayoutAlign="center center" style="width:145px;" *ngFor="let item of categoryArray"
+            (click)="checkType(item.name, item.id)" [ngClass]="(displayCategory == item.id) ? 'even' : 'odd' ">
+            <img fxLayoutAlign="center center" src="{{item.image}}" style="width:30px;height:30px" />
+            <div fxLayoutAlign="center center">
+              <label class="categoty-width">{{item.name}}</label>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:10%;" fxLayoutAlign="center center" (click)="scrollHorizontal()">
+          <!-- <mat-icon  *ngIf="noInternet == '0' "  style="font-size:40px;color:#fb7645;margin-top:-30px;">filter_list</mat-icon> -->
+          <!-- <ion-icon *ngIf="noInternet == '0' " name="options" style="width:35px;height:50px;color:#fb7645;margin-top:-10px" (click)="filter()"></ion-icon> -->
+          <!-- <img *ngIf="noInternet == '0' " src="../../assets/newimgfilter.png"
+            style="width:25px;height:35px;color:#fb7645;"  /> -->
+
+            <!-- <div fxFlex="20" fxLayoutAlign="center start"> -->
+              <ion-icon class="arrow-icon-css" style="width:25px;height:35px;color:#fb7645;" name="chevron-forward-outline"></ion-icon>
+           
+
+              <!-- <ion-icon class="arrow-icon-css" style="width:25px;height:35px;color:#fb7645;" name="chevron-back-outline"></ion-icon> -->
+           
+           
+              <!-- </div> -->
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <div *ngIf="countAdvertisement > 0" style="width:98%;margin-left:1%">
+
+        <div class="row" *ngFor="let item of advertisementArray">
+          <div>
+            <div class="column" style="position:relative">
+              <img src={{item.images[0]}} style="border-radius: 5px;width:100%; height:100%;"
+                (click)="showAdvertisementDetail(item.categoryId, item.id, item.isBookmarked)" />
+
+
+
+                
+              <div style="position:absolute;top:7px;right:8px;width:30px;height:30px;"
+                (click)="bookmarkAdvertisement(item.id,item.isBookmarked,item)">
+
+              
+                <ion-icon *ngIf="item.isBookmarked == 1 "
+                style="color:#fb7645;width:24px;height:24px; margin-left:5px" name="heart"></ion-icon>
+              <ion-icon *ngIf="item.isBookmarked == 0 "
+                style="color:#fb7645;width:24px;height:24px; margin-left:5px" name="heart-outline"></ion-icon>
+
+                <ion-icon *ngIf="item.gender == 1 " name="male-outline" style="color:#fb7645;width:23px;height:23px; margin-left:5px"></ion-icon>
+                <ion-icon *ngIf="item.gender == 0 " name="female-outline" style="color:#fb7645;width:23px;height:23px; margin-left:5px"></ion-icon>
+
+                
+                <!-- <img *ngIf="item.gender == 1 " src="../../assets/maleicon.png" style="width:18px; height:18px" />
+                <img *ngIf="item.gender == 0 " src="../../assets/femaleicon.png" style="width:18px; height:18px" /> -->
+
+                <!-- <ion-icon *ngIf="postBookmarkObj [item.id] == true "
+                  style="color:#fb7645;width:24px;height:24px; margin-left:5px" name="heart"></ion-icon>
+                <ion-icon *ngIf="postBookmarkObj [item.id] != true "
+                  style="color:#fb7645;width:24px;height:24px; margin-left:5px" name="heart-outline"></ion-icon> -->
+              </div>
+
+              <div fxLayoutAlign="end end" fxLayout="column" (click)="showAdvertisementDetail(item.categoryId, item.id,item.isBookmarked)"
+                style="position:absolute;background-image: linear-gradient(to bottom, transparent -15%, rgb(0, 0, 0,1)) ;bottom:8px;width:96%;  border-bottom-left-radius: 7px;border-bottom-right-radius: 7px;;">
+
+                <div fxLayout="row" style="width:100%; color:white;padding-top:2px;">
+                  <div fxFlex="100" fxLayoutAlign="start start">
+                    <div class="b">
+                      <label style="font-size:16px;padding-left:5px; font-weight:700">{{item.title}}</label>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div fxLayout="row" style="width:100%; color:white;padding-top:2px; padding-bottom:2px">
+                  <div fxFlex="50" fxLayoutAlign="start start" *ngIf="item.adPriceType == 0">
+                    <label style="font-size:15px;padding-left:5px;font-weight:normal">₹ {{item.price | number}}</label>
+                  </div>
+                  <div fxFlex="50" fxLayoutAlign="start start" *ngIf="item.adPriceType == 1">
+                    <label style="font-size:15px;padding-left:5px;font-weight:normal">$ {{item.price | number}}</label>
+                  </div>
+        
+                  <div fxFlex="50" fxLayoutAlign="end end">
+                    <div class="b" style="margin-top:-5px">
+                      <label
+                        style="font-size:15px; color:white;font-weight:normal;padding-right:3px;">{{item.address}}</label>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+        </div>
+        <div style="width:100%; margin-top:30px;" fxLayoutAlign="center center" *ngIf="lastPage-1 > currentPage">
+          <button mat-button (click)="viewMore()">View More</button>
+        </div>
+
+      </div>
+      <div fxLayout="column">
+
+      
+      <img *ngIf="countAdvertisement == 0 " style="width:100%; height:100%; visibility: visible;" src="../../assets/bright-sale-presentation-slide-template_1262-19198.jpg" />
+      <div *ngIf="countAdvertisement == 0 " style="margin-top:2%">
+        <h2 align="center" style="color:#fb7645">Coming Soon</h2>
+        
+        <h4 align="center" style="color:#fb7645;">To enjoy our Services</h4>
+        <h5 align="center" style="color:#fb7645">Change your Location,</h5>
+        <h5 align="center" style="color:#fb7645">Language Or Category.</h5>
+      </div>
+    </div>
+
+    </div>
+
+      <div class="cl_bottom_fix" fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+      
+        <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+        (click)="home()">
+        <ion-icon name="home" class="cl_post_css" ></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_selected-text_font">HOME</label>
+        </div>
+
+
+        <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+        (click)="openChatList()">
+        <ion-icon class="cl_bottom_nav_css" name="document" ></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">CHATS</label>
+        </div>
+
+
+        <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+          (click)="postAdvertisement()">
+        <ion-icon class="cl_bottom_nav_css"  name="add-circle" >
+        </ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">SELL</label>
+        </div>
+      
+        <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+        (click)="openFavourite()">
+        <ion-icon class="cl_bottom_nav_css" name="heart"  ></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">MY ADS</label>
+        </div>
+
+
+        <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+          (click)="openProfile()">
+          <ion-icon class="cl_bottom_nav_css" name="person"  ></ion-icon>
+          <label fxLayoutAlign="center center" class="cl_text_font">PROFILE</label>
+        </div>
+
+      </div>
+   
+
+
+
+  </div>
+
+
+</ion-content>

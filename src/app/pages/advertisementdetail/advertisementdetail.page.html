@@ -1,0 +1,222 @@
+<ion-content>
+
+  <div fxLayoutAlign="start center">
+  <ion-slides [options]="slideOptions" pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)" 
+    class="half-black">
+    <ion-slide *ngFor="let item of advertisementImages" >
+      <div style="width:100%;height:250px;position: relative;margin-bottom:5px" >
+        <img src="{{item}}" style="width:100%; height:100%"/>
+      </div>
+
+    </ion-slide>
+  </ion-slides>
+  
+
+    <div fxLayout="row" class="cl_header">
+      <ion-row style="width:100%">
+        <ion-col size="2">
+          <button ion-button class="cl-back-button" (click)="goBackword()" style="color:white;margin:7px"></button>
+        </ion-col>
+
+        <ion-col size="8" align="center">
+        </ion-col>
+        <!-- <ion-col size="2" fxLayoutAlign="end center" (click)="editAdvertisement()" *ngIf="advertisementType == 0 ">
+          <mat-icon style="color:white;font-size:20px;margin-top:-5px;cursor:pointer ">edit</mat-icon>
+        </ion-col>
+        <ion-col size="2" fxLayoutAlign="center center" *ngIf="advertisementType != 0 ">
+        </ion-col> -->
+        <ion-col size="2" fxLayoutAlign="center center" (click)="sharePicker(advertisementImages[0])">
+          <img src="../../../assets/sharewhitee.png" class="cl_share_icon" />
+
+        </ion-col>
+     
+      </ion-row>
+    </div>
+    <ion-row class="cl_middle_arrow" style="width:100%">
+      <ion-col size="2" fxLayoutAlign="center center">
+      <mat-icon  class="cl_middle_arrow_left" (click)="prevSlide(slider)">keyboard_arrow_left</mat-icon>
+        </ion-col>
+
+        <ion-col size="8">
+        </ion-col>
+
+        <ion-col size="2" fxLayoutAlign="center center">
+      <mat-icon  class="cl_middle_arrow_right"  (click)="nextSlide(slider)">keyboard_arrow_right</mat-icon>
+        </ion-col>
+    </ion-row>
+
+    <!-- <div fxLayout="row"  class="cl_middle_arrow" style="width:100%">
+     
+     
+     
+    </div> -->
+  </div>
+
+
+
+  <div fxLayout="row" style="margin-top:10px;" class="cl_margin">
+    <div fxLayoutAlign="start start" style="width:85%; color:black">
+      <div fxLayout="column" style="color:black; margin-left:4px" *ngIf="priceType == 0">
+        <label style="font-size:18px;">{{title}}</label>
+        <label style="margin-top:5px;font-size: 16;">₹ {{price | number}}</label>
+      </div>
+      <div fxLayout="column" style="color:black; margin-left:4px" *ngIf="priceType == 1">
+        <label style="font-size:18px;">{{title}}</label>
+        <label style="margin-top:5px;font-size: 16;">$ {{price | number}}</label>
+      </div>
+
+    </div>
+
+    <div fxLayoutGap="15px" fxLayoutAlign="end center" style="width:6%;">
+      <div fxLayout="column" fxLayoutAlign="end start" (click)="editAdvertisement()" *ngIf="advertisementType == 0 ">
+        <mat-icon style="color:rgb(87, 85, 85);font-size:20px;margin-top:-2px;cursor:pointer ">edit</mat-icon>
+        <label style="color:rgb(87, 85, 85);font-size:10px;margin-top:-2px;cursor:pointer ">Edit</label>
+      </div>
+      <!-- <div fxLayoutAlign="end start" (click)="sharePicker(advertisementImages[0])">
+        <ion-icon name="share-social-outline" class="cl_share_icon"></ion-icon>
+      </div> -->
+      <div fxLayout="column" fxLayoutAlign="end center" (click)="AskdeleteAdvertisement()" *ngIf="advertisementType == 0 ">
+        <mat-icon style="color:rgb(87, 85, 85);font-size:20px;margin-top:-2px;cursor:pointer ">delete</mat-icon>
+        <label style="color:rgb(87, 85, 85);font-size:10px;margin-top:-2px;cursor:pointer ">Delete</label>
+      </div>
+    </div>
+    <div fxLayoutAlign="end start" style="width:9%;" fxLayout="column">
+
+      <div (click)="bookmarkAdvertisement(advertisementId,isBookmarked)">
+    
+      <ion-icon *ngIf="isBookmarked == 1 " style="color:#fb7645; margin-left:5px;width:23px; height:23px;" name="heart"></ion-icon>
+      <ion-icon *ngIf="isBookmarked == 0 " style="color:#fb7645; margin-left:5px;width:23px; height:23px;" name="heart-outline"></ion-icon>
+      </div>
+      <ion-icon *ngIf="gender == 1 " name="male-outline" style="color:#fb7645;width:22px;height:22px; margin-left:5px"></ion-icon>
+      <ion-icon *ngIf="gender == 0 " name="female-outline" style="color:#fb7645;width:22px;height:22px; margin-left:5px"></ion-icon>
+
+      <!-- <ion-icon fxLayoutAlign="end start" name="heart-outline" style="width:23px; height:23px;"></ion-icon> -->
+    </div>
+  </div>
+
+  <div fxLayout="row" style="margin-top:10px;" class="cl_margin">
+    <div fxLayoutAlign="start start" style="width:75%; color:black">
+      <mat-icon style="color:black;font-size:17px">place</mat-icon>
+      <label style="margin-left:-3px" class="cl_gray_label cl_font_14">{{address}} </label>
+    </div>
+
+    <div fxLayoutAlign="end start" style="width:25%;">
+      <label class="cl_gray_label cl_font_13">{{date | date}}</label>
+    </div>
+  </div>
+  <!-- <ion-item-divider style="width:100%;margin-top:-15px">
+
+  </ion-item-divider>
+
+  <div class="cl_margin" style="margin-top:5px">
+
+    <ion-row>
+      <ion-col size="12">
+        <label class="cl_gray_title cl_font_13"><b>Details</b></label>
+
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top:-5px">
+      <ion-col size="6">
+        <label class="cl_gray_label cl_font_14">YEAR</label>
+      </ion-col>
+
+      <ion-col size="6">
+        <label class="cl_gray_label cl_font_13">2009</label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top:-5px">
+      <ion-col size="6">
+        <label class="cl_gray_label cl_font_13">KM DRIVEN</label>
+      </ion-col>
+
+      <ion-col size="6">
+        <label class="cl_gray_label cl_font_13">200,000 KM</label>
+      </ion-col>
+    </ion-row>
+  </div> -->
+  <ion-item-divider style="width:100%;margin-top:-20px; color:black"></ion-item-divider>
+
+  <div style="width:96%;margin-left:2%; margin-top:5px">
+    <label style="font-size:18px; color : rgb(78, 77, 77); margin-left:5px"><b>Description</b></label>
+  </div>
+  <ion-item-divider style="margin-left:-2px; padding-bottom :8px; margin-top:4px">
+    <label class="cl_gray_label cl_font_14">{{description}}</label>
+  </ion-item-divider>
+
+  <ion-item-divider style="padding-bottom:10px" (click)="viewProfile()">
+    <div style="margin-top:10px" class="cl_margin" fxLayout="row">
+      <div style="width:20%; margin-left:-7px">
+        <img *ngIf="userImg == '' " src="../../../assets/defaultprofilepic.png" fxLayoutAlign="start start" class="cl_default_pic" />
+        <img *ngIf="userImg != '' " src="{{userImg}}" fxLayoutAlign="start start" class="cl_default_pic" style="border-radius:100%"/>
+   
+      </div>
+
+      <div style="width:75%">
+        <label class="cl_gray_title cl_font_13"><b>{{userName}}</b></label><br />
+        <label class="cl_gray_label cl_font_14">Member since {{userCreated | date}}</label><br />
+        <label class="cl_font_13" style="color : #fe4f14">SEE PROFILE</label>
+      </div>
+
+      <div fxLayoutAlign="center center">
+
+        <mat-icon class="cl_arrow_right">keyboard_arrow_right</mat-icon>
+      </div>
+
+    </div>
+
+  </ion-item-divider>
+
+
+  <ion-item-divider fxLayout="row" style="margin-left:-10px; padding-bottom :8px; margin-top:4px" (click)="viewPaymentLogs()" *ngIf="advertisementType == 0 ">
+   
+    <div style="margin-top:10px" class="cl_margin" fxLayout="row" fxFlex="100">
+      <div fxFlex="95">
+        <label  style="font-size:15px;color:black; font-weight:500">Payment history</label>
+      </div>
+    <div fxLayoutAlign="center center" fxFlex="5">
+
+      <mat-icon class="cl_arrow_right">keyboard_arrow_right</mat-icon>
+    </div>
+    </div>
+  </ion-item-divider>
+  <div class="cl_margin" style="margin-top:5px">
+    <label class="cl_adpost"><b>Add posted at</b></label>
+  </div>
+  <div id="map_canvas" style=" margin-bottom:20%;margin-top:10px;"></div>
+
+
+
+
+
+  <div class="cl_call_message_maindiv" fxLayout="row">
+    <div class="cl_message_div" fxLayout="row" (click)="sendMessage()" style="cursor: pointer">
+      <div fxFlex="50" fxLayoutAlign="center center">
+        <!-- <ion-icon name="call" ></ion-icon> -->
+        <mat-icon class="cl_chat_icon">chat</mat-icon>
+      </div>
+      <div fxFlex="50" fxLayoutAlign="start center">
+        <label class="cl_font_14">CHAT</label>
+      </div>
+    </div>
+    <div class="cl_call_div" fxLayout="row" (click)="makeCall()" style="cursor: pointer">
+      <div fxFlex="50" fxLayoutAlign="center center">
+        <mat-icon class="cl_chat_icon">call</mat-icon>
+      </div>
+      <div fxFlex="50" fxLayoutAlign="start center">
+        <label class="cl_font_14">CALL</label>
+      </div>
+    </div>
+
+    <!-- <div style="width:50%;" fxLayout="row" (click)="makeCall()" style="cursor: pointer">
+      <div fxFlex="50" align="center">
+        <ion-icon name="call"  class="cl_call_icon"></ion-icon>
+      </div>
+      <div fxFlex="50" align="center">
+        <label class="cl_font_14" >CALL</label>
+      </div>
+    </div> -->
+  </div>
+
+</ion-content>

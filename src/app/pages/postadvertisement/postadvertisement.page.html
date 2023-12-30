@@ -1,0 +1,212 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-row>
+      <ion-col size="3">
+        <label style="color:white; font-size:17px; margin-left:10px">Logo</label>
+      </ion-col>
+      <ion-col size="6"></ion-col>
+      <ion-col size="3">
+        <label style="color:white;margin-right:10px;font-size:17px;">Pune</label>
+        <mat-icon style="width:15px;height:18px; color:white;position:fixed;right:10">room</mat-icon>
+       
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+<ion-content >
+ 
+  <form #userForm="ngForm" style="width:100%">
+ 
+  
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="width:100%;margin-top:20px">
+    <mat-form-field style="width:96%;" appearance="outline">
+      <mat-label>Title</mat-label>
+          <input matInput class="form-control" type="text" name="title" [(ngModel)]="advertisementModel.title" #title="ngModel"
+            align="center" required pattern="[a-zA-Z0-9,.  ]+$">
+            <mat-error>
+              <div class="form-group" style="margin-bottom:10px">
+                <div *ngIf="title.invalid && (title.dirty || title.touched)">
+                  Title Is Requird
+                </div>
+              </div>
+            </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="width:100%;margin-top:5px">
+    <mat-form-field style="width:96%" appearance="outline">
+      <mat-label>Description</mat-label>
+          <input matInput class="form-control" type="text" name="description" [(ngModel)]="advertisementModel.description" #description="ngModel"
+            align="center" required >
+            <mat-error>
+              <div class="form-group">
+                <div *ngIf="description.invalid && (description.dirty || description.touched)">
+                  Description Is Requird
+                </div>
+              </div>
+            </mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<div fxLayout="row" fxLayoutAlign="center center" style="margin-top:5px">
+  <mat-form-field style="width:96%" appearance="outline">
+    <mat-label>Select Category</mat-label>
+   
+    <mat-select 
+    name="type" 
+    (selectionChange)="selectCategoryType(categoryId)"
+    class="filter-select" 
+    [(value)]="categoryId">
+      <mat-option *ngFor="let type of categoryArray" [value]="type.id">
+        {{type.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+
+<ion-row style="border: 1px solid #d3d5da;border-radius: 5px;height:64px; padding-left:8px; width:96%; margin-left: 2% ; margin-right: 2%; margin-top:5px">
+  <ion-col size="4" fxLayoutAlign="start center">
+<label fxLayoutAlign="start center">Gender</label>
+
+  </ion-col>
+
+  <ion-col size="8" fxLayoutAlign="center center">
+    <ion-radio-group (ionChange)="radioGroupChange($event)" [(ngModel)]="checkRadioButton">
+
+    <div fxLayout="row">
+        <div style="margin-right:20px" fxLayoutAlign="center center">
+          <ion-radio  value="male" ></ion-radio>
+          <ion-label fxLayoutAlign="center center" style="margin-left:10px">Male</ion-label>
+        </div>
+  
+        <div fxLayoutAlign="center center">
+          <ion-radio  value="female"></ion-radio>
+        <ion-label style="margin-left:10px">Female</ion-label>
+        
+      </div>
+     
+    </div>
+  </ion-radio-group>
+
+  
+  </ion-col>
+</ion-row>
+
+
+
+
+
+<div fxLayout="row" fxLayoutAlign="center center" style="width:100%;margin-top:25px">
+  <mat-form-field style="width:96%; margin-left: 2% ; margin-right: 2%;" appearance="outline">
+    <mat-label style="color:black; background-color: white;">Email</mat-label>
+    <input matInput class="form-control " name="email" [(ngModel)]="advertisementModel.email" #email="ngModel"
+      pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+    <mat-error>
+      <div class="form-group">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" >
+         Invalid email address
+        </div>
+      </div>
+    </mat-error>
+
+  </mat-form-field>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center" style="width:100%;">
+  <mat-form-field style="width:20%; height:82px; margin-right:10px; " appearance="outline">
+  
+    <mat-select 
+    name="type" 
+    (selectionChange)="selectCountryCode(selectedCode)"
+    class="filter-select" 
+    [(value)]="selectedCode">
+      <mat-option *ngFor="let code of countryCode" [value]="code.code">
+        +{{code.code}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field style="width:72%; margin-top:10px" appearance="outline">
+    <mat-label>Mobile</mat-label>
+        <input matInput class="form-control" type="tel" name="contact" minlength="10" maxlength="10" [(ngModel)]="advertisementModel.contact" #contact="ngModel"
+          align="center" required pattern="[0-9]+$">
+          <mat-error>
+            <div class="form-group">
+              <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+                Mobile Is Requird
+              </div>
+            </div>
+          </mat-error>
+  </mat-form-field>
+</div>
+
+
+
+<div fxLayout="row" fxLayoutAlign="center center" style="width:100%;margin-top:5px">
+    <mat-form-field style="width:96%;" appearance="outline">
+    <mat-label>Languages you support</mat-label>
+      <mat-select 
+      name="year" 
+      (selectionChange)="selectedChanged(selectedLanguages)"
+      class="filter-select" 
+      [(value)]="selectedLanguages" 
+     
+      multiple >
+        <mat-option *ngFor="let year of languageArray" [value]="year.name">
+          {{year.name}}
+        </mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+
+
+
+    <button mat-raised-button class="loginButton" [disabled]="email.invalid ||  description.invalid || title.invalid"
+      (click)="addAdvertisementData(advertisementModel)"><b>Next</b></button>
+
+<div class="cl_bottom_fix" fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+      
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+  (click)="home()">
+  <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+  <label fxLayoutAlign="center center" class="cl_text_font">HOME</label>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+  (click)="openChatList()">
+  <ion-icon class="cl_bottom_nav_css" name="document" (click)="openChatList()"></ion-icon>
+  <label fxLayoutAlign="center center" class="cl_text_font">CHATS</label>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+    (click)="postAdvertisement()">
+  <ion-icon class="cl_post_css"  name="add-circle" (click)="postAdvertisement()">
+  </ion-icon>
+  <label fxLayoutAlign="center center" class="cl_selected-text_font">SELL</label>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+  (click)="openFavourite()">
+  <ion-icon class="cl_bottom_nav_css" name="heart"  (click)="openFavourite()"></ion-icon>
+  <label fxLayoutAlign="center center" class="cl_text_font">MY ADS</label>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+    (click)="openProfile()">
+    <ion-icon class="cl_bottom_nav_css" name="person"  (click)="openProfile()"></ion-icon>
+    <label fxLayoutAlign="center center" class="cl_text_font">PROFILE</label>
+  </div>
+
+</div>
+
+</ion-content>

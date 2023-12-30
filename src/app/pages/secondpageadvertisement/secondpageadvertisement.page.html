@@ -1,0 +1,189 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-row>
+      <ion-col size="2">
+        <button ion-button class="cl-back-button" (click)="goBackword()" style="color:white;margin:7px"></button>
+      </ion-col>
+      <ion-col size="10" class="TitleHeader TitleText">
+        <ion-label style="color:white; margin-left:-15px">Advertisement</ion-label>
+      </ion-col>
+
+    </ion-row>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <h5 align="center" style=" margin-top:8%">Select Plan</h5>
+  <div fxLayout="row" fxLayoutAlign="center center"
+    style="width:96%; margin-left:2%; color: white; background-color: #50a46c; padding:20px;">
+
+   
+
+  
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:25%; border-right: 1px solid white;">
+
+      <label style="font-size:12px ">One Week</label>
+      <label style="margin-top:5px">{{defaultAdvertisementWeekPrice}}$</label>
+
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:40%;border-right: 1px solid white;">
+
+      <label style="font-size:12px ">Multiple Weeks</label>
+      <label style="margin-top:5px">${{defaultAdvertisementWeekPrice}} + ( {{updatedWeeks}} * ${{furtherAdvertisementWeeksPrice}})</label>
+
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:35%;">
+
+      <mat-form-field class="cl_matformfield_dropdown cl_select_week" >
+      <label style="color:white;font-size:12px; margin-bottom:10px">Select Weeks</label>
+      <select matNativeControl #week (change)="selectAdvertisementNoOfWeeksType(week.value)" style="color:white;width:100%" [(ngModel)]='updatedWeeks'>
+        <option *ngFor="let check of weeksArray" [value]="check" style="color:white"> {{check}}</option>
+      </select>
+
+        <!-- <mat-select matNativeControl #week (selectionChange)="selectAdvertisementNoOfWeeksType(week.value)" style="width:80% " [(value)]="selectedNoOfWeek">
+          <mat-option *ngFor="let check of weeksArray" [value]="check" style="color:white"> {{check}}</mat-option>
+        </mat-select> -->
+      </mat-form-field>
+
+
+      
+    </div>
+  </div>
+
+
+
+
+  <div class="cl_select_margin">
+    <ion-row style="margin-top:20px">
+      <ion-col size="4" fxLayoutAlign="start center">
+      </ion-col>
+      <ion-col size="5" fxLayoutAlign="center start">
+        <div class="cl_div">
+          <mat-form-field class="cl_matformfield cl_select">
+            <mat-label style="color:white">Select Weeks</mat-label>
+            <select matNativeControl #noweek (change)="selectNoOfWeeksType(noweek.value)" style="color:white"  [(ngModel)]='selectedWeek'>
+              <option *ngFor="let type of weeksArray" [value]="type" style="color:black"> {{type}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+      </ion-col>
+      <ion-col size="1" fxLayoutAlign="end center">
+        <label>=</label>
+      </ion-col>
+      <ion-col size="2" fxLayoutAlign="end center">
+        <label>$ {{finalCalculation}}</label>
+      </ion-col>
+    </ion-row>
+
+
+
+
+    <ion-row style="border: 1px solid white; padding:10px; margin-top:20px; margin-left:2%; margin-right:2%" [ngClass]="(checkBoostStatus == 0) ? 'without-boost' : 'with-boost' "
+      (click)="calculateFinal()">
+      <ion-col size="3">
+        <button style="border-radius: 100%; border: 1px solid white; width: 30px; height:30px"></button>
+      </ion-col>
+      <!-- <ion-col size="2"></ion-col> -->
+      <ion-col size="7" fxLayoutAlign="start center">
+        <label fxLayoutAlign="start center">Boost Ad</label>
+      </ion-col>
+
+      <ion-col size="2" fxLayoutAlign="center center">
+        <label fxLayoutAlign="center center">$100</label>
+      </ion-col>
+    </ion-row>
+
+
+    <div style="border: 1px solid white; height:2px; margin-top:20px;margin-left:2%; margin-right:2% "></div>
+    <ion-row style="margin-top:10px;margin-left:2%; margin-right:2%">
+      <ion-col size="6" fxLayoutAlign="start start">
+        <label>Total</label>
+      </ion-col>
+
+      <ion-col size="6" fxLayoutAlign="end end">
+        <label>$ {{totalCalculation}}</label>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+
+
+
+  <!-- <div *ngIf="imageUrl == 1"
+    style="border:1px solid rgb(201, 195, 195);height:100px;width:96%;border-radius:5px;background-color: white; margin-left:2%; margin-top:20px"
+    fxLayout="column" fxLayoutAlign="center center" onclick="document.getElementById('image_upload').click()">
+    <ion-icon name="camera" style="width:70%; height:70%;color:gray">
+    </ion-icon>
+
+
+    <input style="display: none;" id="image_upload" type="file" (change)="detectEventGallery($event)">
+  </div>
+  <div class="row" *ngFor="let img of urls" style="margin-top:20px; width:96%; margin-left:2%">
+    <div class="column">
+      <img src="{{img}}" style="border-radius:10px">
+
+    </div>
+  </div> -->
+
+
+  <button mat-raised-button class="loginButton"
+    (click)="submmitAdvertisementData(advertisementModel)"><b>Submit</b></button>
+
+
+    <div class="cl_bottom_fix" fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+      
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+      (click)="home()">
+      <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">HOME</label>
+      </div>
+    
+    
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+      (click)="openChatList()">
+      <ion-icon class="cl_bottom_nav_css" name="document" (click)="openChatList()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">CHATS</label>
+      </div>
+    
+    
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+        (click)="postAdvertisement()">
+      <ion-icon class="cl_post_css"  name="add-circle" (click)="postAdvertisement()">
+      </ion-icon>
+      <label fxLayoutAlign="center center" class="cl_selected-text_font">SELL</label>
+      </div>
+    
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+      (click)="openFavourite()">
+      <ion-icon class="cl_bottom_nav_css" name="heart"  (click)="openFavourite()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">MY ADS</label>
+      </div>
+    
+    
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+        (click)="openProfile()">
+        <ion-icon class="cl_bottom_nav_css" name="person"  (click)="openProfile()"></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">PROFILE</label>
+      </div>
+    
+    </div>
+    
+
+
+  <!-- <div class="cl_bottom_fix">
+    <div fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+      <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+      <ion-icon name="document" class="cl_bottom_nav_css" (click)="openChatList()"></ion-icon>
+      <ion-icon name="add-circle" class="cl_post_css" (click)="postAdvertisement()">
+      </ion-icon>
+      <ion-icon name="heart" class="cl_bottom_nav_css" (click)="openFavourite()"></ion-icon>
+      <ion-icon name="person" class="cl_bottom_nav_css" (click)="openProfile()"></ion-icon>
+    </div>
+  </div> -->
+</ion-content>

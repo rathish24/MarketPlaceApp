@@ -1,0 +1,77 @@
+{
+  "_from": "cordova-plugin-x-socialsharing@^5.6.5",
+  "_id": "cordova-plugin-x-socialsharing@5.6.6",
+  "_inBundle": false,
+  "_integrity": "sha512-qaZKr4ozMT7xU2SU12y3nbUSoYYGEJAygf2eLJEWWPx6cPR07NyxV/Py8gzY+iTrua9DSEmLmD0ry08pwb22iA==",
+  "_location": "/cordova-plugin-x-socialsharing",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cordova-plugin-x-socialsharing@^5.6.5",
+    "name": "cordova-plugin-x-socialsharing",
+    "escapedName": "cordova-plugin-x-socialsharing",
+    "rawSpec": "^5.6.5",
+    "saveSpec": null,
+    "fetchSpec": "^5.6.5"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-x-socialsharing/-/cordova-plugin-x-socialsharing-5.6.6.tgz",
+  "_shasum": "c6e4511c7f954ac5d1d91dc63d349ac283536906",
+  "_spec": "cordova-plugin-x-socialsharing@^5.6.5",
+  "_where": "/home/dhananjayraut/Desktop/ionic4-marketplace",
+  "author": {
+    "name": "Eddy Verbruggen - @EddyVerbruggen"
+  },
+  "bugs": {
+    "url": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-x-socialsharing",
+    "platforms": [
+      "ios",
+      "android",
+      "wp8",
+      "windows",
+      "web"
+    ]
+  },
+  "deprecated": false,
+  "description": "Share text, images (and other files), or a link via the native sharing widget of your device. Android is fully supported, as well as iOS 6 and up. WP8 has somewhat limited support.",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "homepage": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin#readme",
+  "keywords": [
+    "Social",
+    "Share",
+    "Twitter",
+    "Facebook",
+    "Email",
+    "SMS",
+    "WhatsApp",
+    "Tumblr",
+    "Pocket",
+    "LinkedIn",
+    "cordova",
+    "WebShare",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "cordova-windows"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-x-socialsharing",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git"
+  },
+  "types": "./types/index.d.ts",
+  "version": "5.6.6"
+}

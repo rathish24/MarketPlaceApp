@@ -1,0 +1,114 @@
+<ion-header class="new-background-color" *ngIf="showSearch == 0 ">
+  <ion-toolbar class="new-background-color">
+    <div fxFlex="100" fxLayout="row" >
+      <div fxFlex="85" fxLayoutAlign="start center">
+        <label style="color:white; font-size:17px; margin-left:10px;">Chat</label>
+      </div>
+
+      <div fxFlex="15" (click)="searchShow()" fxLayoutAlign="end center">
+        <ion-icon name="search" style="color:white; height:25px; width: 26px; margin-right:10px;"></ion-icon>
+      </div>
+    </div>
+
+   
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="new-toolbar-background-color" *ngIf="showSearch == 1 ">
+  <ion-toolbar class="new-toolbar-background-color">
+   
+
+    <div  fxFlex="100" fxLayout="row" style="background-color: white;width:100%;">
+      <div fxFlex="15" fxLayoutAlign="center center">
+        <ion-icon class="back-icon-css" (click)="goBackword()" name="arrow-back-outline"></ion-icon>
+         <!-- <button ion-button class="cl-back-button" (click)="goBackword()" style="color:white;margin:7px"></button> -->
+      </div>
+      <div fxLayoutAlign="start center" style="width: 70%;">
+        <input placeholder="Search.." (input)="search($event)"
+          style="background: white;width: 87%;font-size:13px;color:rgb(61, 60, 60)" />
+      </div>
+      <div fxLayoutAlign="start center" *ngIf="showClose == 1" style="width: 15%;">
+        <ion-icon class="close-icon-css" (click)="clearSearch()" name="close"></ion-icon>
+      </div>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+ 
+  <div style="width:100%;height:100%;">
+    <div *ngIf="usersCount > 0 ">
+      <div *ngFor="let item of usersArray" style="margin-top:10px">
+        <div *ngIf="item.id != userId">
+            
+          <div fxLayout="row" (click)="detailChat(item.name, item.id, item.image)" style="margin-left:10px; width:100%;padding:5px;">
+            <div style="width:16%">
+              <img *ngIf="item.image == null || item.image == '' " src="../../../assets/agent.png"
+              style="border-radius: 50%;width:65px; height:62px; border:1px solid rgb(240, 234, 234);background-color:#f1f4f9" />
+              <img *ngIf="item.image != null || item.image != '' " src="{{item.image}}"
+                style="border-radius: 50%;width:65px; height:62px; border:1px solid rgb(240, 234, 234);background-color:#f1f4f9" />
+            </div>
+            <div style="margin-top:5px;width:84%">
+              <ion-item style="margin-top:2px;background-color: transparent;">
+                <div fxLayout="column">
+                  <label style="color:rgb(49, 49, 49);font-size:16px;font-weight:420">{{item.name}}</label>
+                  <label class="text" style="color:rgb(110, 108, 108); font-size:11px;margin:2px;">{{item.lastMessage}}</label>
+                </div>
+              </ion-item>
+            </div>
+
+          
+         
+          </div>
+
+        
+      
+
+        </div>
+
+
+      </div>
+    </div>
+    <div *ngIf="usersCount == 0 " fxLayoutAlign="center center">
+      <h4 style="margin-top:25%;">No records found</h4>
+    </div>
+
+    <div class="cl_bottom_fix" fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="home()">
+        <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">HOME</label>
+      </div>
+
+
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="openChatList()">
+        <ion-icon class="cl_post_css" name="document" (click)="openChatList()"></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_selected-text_font">CHATS</label>
+      </div>
+
+
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="postAdvertisement()">
+        <ion-icon class="cl_bottom_nav_css" name="add-circle" >
+        </ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">SELL</label>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="openFavourite()">
+        <ion-icon class="cl_bottom_nav_css" name="heart" (click)="openFavourite()"></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">MY ADS</label>
+      </div>
+
+
+      <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" (click)="openProfile()">
+        <ion-icon class="cl_bottom_nav_css" name="person" (click)="openProfile()"></ion-icon>
+        <label fxLayoutAlign="center center" class="cl_text_font">PROFILE</label>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

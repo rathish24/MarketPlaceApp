@@ -1,0 +1,220 @@
+<ion-header class="new-background-color">
+  <ion-toolbar class="new-background-color">
+    <!-- <ion-buttons slot="start" style="color:white">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <label style="color:white; font-size:17px; margin-left:10px">Favourite</label>
+
+    <!-- <ion-title style="color:white; margin-left:10px">
+      Favourite
+    </ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item-divider>
+  <ion-segment (ionChange)="segmentChanged($event)" value="myadds" [(ngModel)]="segment">
+    <ion-segment-button value="0" style="--background: white;">
+      <ion-label >My Adds</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="1" style="--background: white;">
+      <ion-label >Bookmarks</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-item-divider>
+
+<ion-slides #slides pager="false" [options]="sliderOptions" (ionSlideDidChange)="slideChanged(slides)" (ionSlidesDidLoad)="slideChanged(slides)" style="width:100%">
+
+  <ion-slide style="height:100%;width:100%">
+    <div  *ngIf="tabTitle == '0' " style="width:100%">
+
+      <div *ngIf="arrayLength > 0" style="width:98%; margin-left:1%; margin-top:10px">
+  
+      
+        <div class="row" *ngFor="let item of advertisementArray">
+          <div  style="width:100%">
+            <div class="column" style="position:relative">
+              <img src={{item.images[0]}} style="border-radius: 5px;width:100%; height:100%" (click)="showAdvertisementDetail(image,item.id,0,item.isActive)"/>
+              <div  style="position:absolute;top:7px;left:8px;width:30px;height:30px;"
+              (click)="activeInactiveAd(item)">
+              <ion-icon  *ngIf="item.isActive == 1 " name="checkmark-circle-outline"  style="color:#fb7645;width:23px;height:23px; margin-left:5px"></ion-icon>
+              <ion-icon  *ngIf="item.isActive == 0 " name="close-circle-outline"  style="color:#fb7645;width:23px;height:23px; margin-left:5px"></ion-icon>
+              </div>
+              <div style="position:absolute;top:7px;right:8px;width:30px;height:30px;"
+              (click)="bookmarkAdvertisement(item.id)">
+              <!-- <img *ngIf="item.gender == 1 " src="../../../assets/newmicon.png" class="width:18px; height:18px" />
+              <img *ngIf="item.gender == 0 " src="../../../assets/newficon.png" class="width:18px; height:18px" /> -->
+
+              <ion-icon *ngIf="item.isBookmarked == 1 || getBookmarkObj [item.id] == true "
+              style="color:#fb7645;width:24px;height:24px; margin-left:5px" name="heart"></ion-icon>
+            <ion-icon *ngIf="item.isBookmarked == 0 || getBookmarkObj [item.id] != true "
+              style="color:#fb7645;width:24px;height:24px; margin-left:5px" name="heart-outline"></ion-icon>
+         
+
+              <ion-icon *ngIf="item.gender == 1 " name="male-outline"  style="color:#fb7645;width:23px;height:23px; margin-left:5px"></ion-icon>
+              <ion-icon *ngIf="item.gender == 0 " name="female-outline"  style="color:#fb7645;width:23px;height:23px; margin-left:5px"></ion-icon>
+
+             
+           
+              </div>
+            
+                <div fxLayoutAlign="end end" fxLayout="column" (click)="showAdvertisementDetail(item.categoryId, item.id,0)"
+                style="position:absolute;background-image: linear-gradient(to bottom, transparent -15%, rgb(0, 0, 0,1)) ;bottom:8px;width:96%;  border-bottom-left-radius: 7px;border-bottom-right-radius: 7px;;">
+  
+  
+  
+                <div fxLayout="row" style="width:100%; color:white;padding-top:2px;">
+                  <div fxFlex="100" fxLayoutAlign="start start">
+                    <div class="b">
+                    <label style="font-size:18px;padding-left:5px; font-weight:500">{{item.title}}</label>
+                    </div>
+                  </div>
+  
+  
+                </div>
+  
+                <div fxLayout="row" style="width:100%; color:white; padding-bottom:2px">
+                  <div fxFlex="50" fxLayoutAlign="start center" *ngIf="item.adPriceType == 0">
+                    <label style="font-size:15px;padding-left:5px;font-weight:normal">₹ {{item.price | number}}</label>
+                  </div>
+                  <div fxFlex="50" fxLayoutAlign="start center" *ngIf="item.adPriceType == 1">
+                    <label style="font-size:15px;padding-left:5px;font-weight:normal">$ {{item.price | number}}</label>
+                  </div>
+        
+                  <div fxFlex="50" fxLayoutAlign="end start">
+                    <div class="b" style="margin-top:-5px">
+                      <label style="font-size:15px; color:white;padding-right: 5px;">{{item.address}}</label>
+                    </div>
+                  </div>
+  
+                </div>
+  
+               
+  
+  
+              </div>
+            </div>
+  
+          </div>
+  
+  
+        </div>
+    
+    
+      </div>
+      <img style="width:100%; height:60px; visibility: hidden;" />
+      <div *ngIf="arrayLength == 0 " style="margin-top:20%;">
+        <h3 align="center">No records found.</h3>
+      </div>
+  
+  
+    </div></ion-slide>
+
+
+  <ion-slide style="height:100vh;width:100%; overflow-y: scroll;" >
+  
+    <div  *ngIf="tabTitle == '1' " style="width:100%">
+      <div *ngIf="bookmarkLength > 0" style="width:98%; margin-left:1%; margin-top:10px" fxLayoutALign="start start">
+  
+      
+        <div class="row" *ngFor="let item of advertisementArray">
+          <div (click)="showBookmarkAdvertisementDetail(item.categoryId, item.id,item.isBookmarked)">
+            <div class="column" style="position:relative">
+              <img src={{item.images[0]}} style="border-radius: 5px;width:100%; height:100%" />
+              <div
+                style="position:absolute; bottom:8px;width:96%;background-image: linear-gradient(to bottom, transparent -15%, rgb(0, 0, 0,1)) ;bottom:8px;width:96%;; border-bottom-left-radius: 7px;border-bottom-right-radius: 7px;;">
+  
+                <div fxLayout="row" style="width:100%; color:white;padding-top:2px;">
+                  <div fxFlex="100" fxLayoutAlign="start start">
+                    <div class="b">
+                    <label style="font-size:18px;padding-left:5px;font-weight:500">{{item.title}}</label>
+                    </div>
+                  </div>
+  
+  
+                </div>
+  
+                <div fxLayout="row" style="width:100%; color:white;padding-top:2px; padding-bottom:2px">
+                  <div fxFlex="50" fxLayoutAlign="start center" *ngIf="item.adPriceType == 0">
+                    <label style="font-size:15px;padding-left:5px">₹ {{item.price | number}}</label>
+                  </div>
+                  <div fxFlex="50" fxLayoutAlign="start center" *ngIf="item.adPriceType == 1">
+                    <label style="font-size:15px;padding-left:5px;">$ {{item.price | number}}</label>
+                  </div>
+                  
+
+                  <div fxFlex="50" fxLayoutAlign="end start">
+                    <div class="b" style="margin-top:-5px">
+                      <label style="font-size:15px; color:white;padding-right: 5px;">{{item.address}}
+                          </label>
+                    </div>
+                  </div>
+  
+                </div>
+  
+  
+  
+  
+              </div>
+            </div>
+  
+          </div>
+  
+  
+        </div>
+    
+    
+      </div>
+      <img style="width:100%; height:60px; visibility: hidden;" />
+      <div *ngIf="bookmarkLength == 0 " style="margin-top:20%;">
+        <h3 align="center">No records found.</h3>
+      </div>
+  
+    </div>
+  </ion-slide>
+</ion-slides>
+ 
+ 
+
+ 
+
+
+  <div class="cl_bottom_fix" fxLayout="row" fxLayoutAlign="space-around center" style="margin-top:10px">
+      
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+    (click)="home()">
+    <ion-icon name="home" class="cl_bottom_nav_css" (click)="home()"></ion-icon>
+    <label fxLayoutAlign="center center" class="cl_text_font">HOME</label>
+    </div>
+
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+    (click)="openChatList()">
+    <ion-icon class="cl_bottom_nav_css" name="document" (click)="openChatList()"></ion-icon>
+    <label fxLayoutAlign="center center" class="cl_text_font">CHATS</label>
+    </div>
+
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+      (click)="postAdvertisement()">
+    <ion-icon class="cl_bottom_nav_css"  name="add-circle" >
+    </ion-icon>
+    <label fxLayoutAlign="center center" class="cl_text_font">SELL</label>
+    </div>
+  
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+    (click)="openFavourite()">
+    <ion-icon class="cl_post_css" name="heart"  (click)="openFavourite()"></ion-icon>
+    <label fxLayoutAlign="center center" class="cl_selected-text_font">MY ADS</label>
+    </div>
+
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="width:20%" 
+      (click)="openProfile()">
+      <ion-icon class="cl_bottom_nav_css" name="person"  (click)="openProfile()"></ion-icon>
+      <label fxLayoutAlign="center center" class="cl_text_font">PROFILE</label>
+    </div>
+
+  </div>
+
+</ion-content>
